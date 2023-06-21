@@ -1,4 +1,4 @@
-import { taskDisplayController } from "./taskDisplayController";
+import { addNewTaskButton } from "./addNewTask";
 
 const inboxComponent = (() => {
   const setUp = () => {
@@ -11,7 +11,7 @@ const inboxComponent = (() => {
     inboxTitle.textContent = "Inbox";
 
     inboxContainer.appendChild(inboxTitle);
-    inboxContainer.appendChild(taskDisplayController.buttonAddTaskSetUp());
+    inboxContainer.appendChild(addNewTaskButton.setUp());
 
     return inboxContainer;
   };

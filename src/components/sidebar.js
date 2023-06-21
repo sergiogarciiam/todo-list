@@ -1,3 +1,5 @@
+import { mainDisplayController } from "./mainDisplayController";
+
 const sidebarComponent = (() => {
   const setUp = () => {
     const sidebarContainer = document.createElement("nav");
@@ -20,6 +22,7 @@ const sidebarComponent = (() => {
 
     sidebarButtonsContainer.classList.add("sidebar-buttons-container");
 
+    inbox.addEventListener("click", mainDisplayController.setInbox);
     // add events to each button
 
     sidebarButtonsContainer.appendChild(inbox);
@@ -56,6 +59,7 @@ const sidebarComponent = (() => {
     const button = document.createElement("button");
     button.textContent = name;
     button.classList.add(`${name}-button`);
+
     return button;
   }
 

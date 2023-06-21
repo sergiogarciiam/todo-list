@@ -3,8 +3,10 @@ import { sidebarComponent } from "./sidebar";
 import { inboxComponent } from "./inbox";
 
 const mainDisplayController = (() => {
+  let pageContainer = null;
+
   const setUp = () => {
-    const pageContainer = document.createElement("div");
+    pageContainer = document.createElement("div");
 
     pageContainer.classList.add("page-container");
 
@@ -15,7 +17,17 @@ const mainDisplayController = (() => {
     document.body.appendChild(pageContainer);
   };
 
-  return { setUp };
+  const setInbox = () => {
+    removeMain();
+    pageContainer.appendChild(inboxComponent.setUp());
+  };
+
+  function removeMain() {
+    const main = document.querySelector("main");
+    main.remove();
+  }
+
+  return { setUp, setInbox };
 })();
 
 export { mainDisplayController };
