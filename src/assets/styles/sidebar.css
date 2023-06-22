@@ -9,6 +9,9 @@
 
   background-color: var(--header-color);
   box-shadow: 2px 2px 5px var(--shadow-color);
+
+  transform-origin: right;
+  transition: 1s;
 }
 
 .sidebar-buttons-container {
@@ -50,4 +53,9 @@
 .source-link:hover {
   color: var(--letter-color);
   text-decoration: underline;
+}
+
+.sidebar-hide {
+  transform: translateX(-100px);
+  opacity: 0;
 }
