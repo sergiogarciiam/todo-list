@@ -1,3 +1,33 @@
+:root {
+  --background-color: #1f1f1f;
+  --header-color: #262626;
+
+  --letter-color: #eee;
+  --second-letter-color: #999999;
+  --mark-color: #444444;
+  --shadow-color: #191919;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--letter-color);
+}
+
+.page-container {
+  height: 100vh;
+
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  grid-template-rows: 1fr 15fr;
+  grid-template-areas: "header header" "sidebar main";
+}
+
 .hide {
   display: none;
 }

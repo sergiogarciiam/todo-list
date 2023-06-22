@@ -1,6 +1,7 @@
 import { headerComponent } from "./header";
 import { sidebarComponent } from "./sidebar";
 import { inboxComponent } from "./inbox";
+import { todayComponent } from "./today";
 
 const mainDisplayController = (() => {
   let pageContainer = null;
@@ -22,12 +23,17 @@ const mainDisplayController = (() => {
     pageContainer.appendChild(inboxComponent.setUp());
   };
 
+  const setToday = () => {
+    removeMain();
+    pageContainer.appendChild(todayComponent.setUp());
+  };
+
   function removeMain() {
     const main = document.querySelector("main");
     main.remove();
   }
 
-  return { setUp, setInbox };
+  return { setUp, setInbox, setToday };
 })();
 
 export { mainDisplayController };

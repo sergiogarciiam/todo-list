@@ -15,14 +15,15 @@ const sidebarComponent = (() => {
   function createSidebarButtonsContainer() {
     const sidebarButtonsContainer = document.createElement("div");
 
-    const inbox = createButton("inbox");
-    const today = createButton("today");
-    const week = createButton("week");
-    const projects = createButton("projects");
+    const inbox = createButton("Inbox");
+    const today = createButton("Today");
+    const week = createButton("Week");
+    const projects = createButton("Projects");
 
     sidebarButtonsContainer.classList.add("sidebar-buttons-container");
 
     inbox.addEventListener("click", mainDisplayController.setInbox);
+    today.addEventListener("click", mainDisplayController.setToday);
     // add events to each button
 
     sidebarButtonsContainer.appendChild(inbox);
@@ -51,6 +52,7 @@ const sidebarComponent = (() => {
     const sourceLink = document.createElement("a");
     sourceLink.classList.add("source-link");
     sourceLink.textContent = "source";
+    sourceLink.href = "https://github.com/sergiogarciiam/todo-list";
 
     return sourceLink;
   }
@@ -58,7 +60,6 @@ const sidebarComponent = (() => {
   function createButton(name) {
     const button = document.createElement("button");
     button.textContent = name;
-    button.classList.add(`${name}-button`);
 
     return button;
   }

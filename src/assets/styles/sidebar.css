@@ -1,0 +1,53 @@
+.sidebar-container {
+  grid-area: sidebar;
+
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  padding: 20px;
+
+  background-color: var(--header-color);
+  box-shadow: 2px 2px 5px var(--shadow-color);
+}
+
+.sidebar-buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar-buttons-container > button {
+  padding: 5px;
+  text-align: left;
+  font-size: 1.1rem;
+
+  border-radius: 10px;
+  border: none;
+
+  color: var(--letter-color);
+  background-color: var(--header-color);
+
+  cursor: pointer;
+  transition: background-color 300ms;
+}
+
+.sidebar-buttons-container > button:hover {
+  background-color: var(--mark-color);
+}
+
+.quick-access {
+  color: var(--second-letter-color);
+}
+
+.source-link {
+  margin-top: auto;
+
+  color: var(--second-letter-color);
+  text-decoration: none;
+}
+
+.source-link:hover {
+  color: var(--letter-color);
+  text-decoration: underline;
+}
