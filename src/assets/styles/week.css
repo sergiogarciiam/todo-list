@@ -1,0 +1,39 @@
+.week-container {
+  margin-left: 0px;
+  padding-left: 50px;
+  overflow-x: scroll;
+}
+
+.days-container {
+  grid-template-columns: repeat(7, 500px);
+  display: grid;
+  gap: 100px;
+}
+
+.days-container {
+  width: 100%;
+}
+
+.day-title {
+  text-decoration: underline;
+}
+
+/* SCROLL BAR */
+.week-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+/* Track */
+.week-container::-webkit-scrollbar-track {
+  background: var(--mark-color);
+}
+
+/* Handle */
+.week-container::-webkit-scrollbar-thumb {
+  background: var(--second-letter-color);
+}
+
+/* Handle on hover */
+.week-container::-webkit-scrollbar-thumb:hover {
+  background: var(--letter-color);
+}
