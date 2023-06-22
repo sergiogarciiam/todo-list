@@ -1,4 +1,4 @@
-import { newTaskComponent } from "./newTask";
+import { taskMenuComponent } from "./taskMenu";
 
 const addNewTaskButton = (() => {
   const setUp = () => {
@@ -6,14 +6,18 @@ const addNewTaskButton = (() => {
 
     addTaskButton.classList.add("add-task-button");
     addTaskButton.textContent = "+ Add task";
-    addTaskButton.addEventListener("click", newTaskSetUp);
+    addTaskButton.addEventListener("click", menuTaskSetUp);
 
     return addTaskButton;
   };
 
-  function newTaskSetUp(event) {
+  function menuTaskSetUp(event) {
+    let task = {
+      name: "",
+    };
+
     event.target.classList.add("hide");
-    event.target.parentNode.appendChild(newTaskComponent.setUp());
+    event.target.parentNode.appendChild(taskMenuComponent.setUp(task));
   }
 
   return { setUp };
