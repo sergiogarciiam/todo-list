@@ -1,3 +1,4 @@
+import { taskController } from "../utils/taskController";
 import { taskMenuComponent } from "./taskMenu";
 
 const addNewTaskButton = (() => {
@@ -6,18 +7,18 @@ const addNewTaskButton = (() => {
 
     addTaskButton.classList.add("add-task-button");
     addTaskButton.textContent = "+ Add task";
-    addTaskButton.addEventListener("click", menuTaskSetUp);
+    addTaskButton.addEventListener("click", openTaskMenu);
 
     return addTaskButton;
   };
 
-  function menuTaskSetUp(event) {
+  function openTaskMenu(event) {
     let task = {
       name: "",
     };
 
     event.target.classList.add("hide");
-    event.target.parentNode.appendChild(taskMenuComponent.setUp(task));
+    event.target.parentNode.appendChild(taskMenuComponent.setUp(null, task));
   }
 
   return { setUp };

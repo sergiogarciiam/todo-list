@@ -1,24 +1,34 @@
+import { taskController } from "../utils/taskController";
+import { taskComponent } from "./task";
+
 const taskMenuComponent = (() => {
-  const setUp = (task) => {
-    const newTaskContainer = document.createElement("div");
-    newTaskContainer.classList.add("new-task-container");
+  let actualId = null;
+  let actualTask = null;
 
-    newTaskContainer.appendChild(createNewTaskNameContainer(task.name));
-    newTaskContainer.appendChild(createNewTaskFeaturesContainer());
-    newTaskContainer.appendChild(createNewTaskDescriptionContainer());
-    newTaskContainer.appendChild(createNewTaskButtonsContainer());
+  const setUp = (id, task) => {
+    const taskMenuContainer = document.createElement("div");
 
-    return newTaskContainer;
+    actualId = id;
+    actualTask = task;
+
+    taskMenuContainer.classList.add("task-menu-container");
+
+    taskMenuContainer.appendChild(createNewTaskNameContainer());
+    taskMenuContainer.appendChild(createNewTaskFeaturesContainer());
+    taskMenuContainer.appendChild(createNewTaskDescriptionContainer());
+    taskMenuContainer.appendChild(createNewTaskButtonsContainer());
+
+    return taskMenuContainer;
   };
 
-  function createNewTaskNameContainer(name) {
+  function createNewTaskNameContainer() {
     const newTaskNameContainer = document.createElement("div");
     const checkbox = document.createElement("button");
     const inputTaskName = document.createElement("input");
 
     newTaskNameContainer.classList.add("new-task-name-container");
     inputTaskName.classList.add("input-task-name");
-    inputTaskName.value = name;
+    inputTaskName.value = actualTask.name;
 
     newTaskNameContainer.appendChild(checkbox);
     newTaskNameContainer.appendChild(inputTaskName);
@@ -53,16 +63,22 @@ const taskMenuComponent = (() => {
     const confirmAddTaskButton = document.createElement("button");
 
     newTaskButtonsContainer.classList.add("new-task-buttons-container");
-
     cancelAddTaskButton.classList.add("cancel-add-task-button");
-    cancelAddTaskButton.textContent = "Cancel";
-    cancelAddTaskButton.type = "button";
-    cancelAddTaskButton.addEventListener("click", hideTaskMenu);
-
     confirmAddTaskButton.classList.add("confirm-add-task-button");
-    confirmAddTaskButton.textContent = "Add task";
+
+    cancelAddTaskButton.textContent = "Cancel";
+    confirmAddTaskButton.textContent = "Confirm";
+
+    cancelAddTaskButton.type = "button";
     confirmAddTaskButton.type = "button";
-    confirmAddTaskButton.addEventListener("click", addTask);
+
+    if (actualId === null) {
+      cancelAddTaskButton.addEventListener("click", hideTaskMenuFromNew);
+      confirmAddTaskButton.addEventListener("click", addTask);
+    } else {
+      cancelAddTaskButton.addEventListener("click", hideTaskMenuFromUpdate);
+      confirmAddTaskButton.addEventListener("click", updateTask);
+    }
 
     newTaskButtonsContainer.appendChild(cancelAddTaskButton);
     newTaskButtonsContainer.appendChild(confirmAddTaskButton);
@@ -71,43 +87,44 @@ const taskMenuComponent = (() => {
   }
 
   function addTask() {
-    const taskContainer = document.createElement("div");
-    const taskCheckboxButton = document.createElement("button");
-    const taskTitle = document.createElement("p");
-    const taskEditButton = document.createElement("button");
-    const taskDeleteButton = document.createElement("button");
+    updateActualTask();
 
     const tasksContainer = document.querySelector(".tasks-container");
-    const inputTaskName = document.querySelector(".input-task-name");
 
-    taskContainer.addEventListener("click", openTaskMenu);
+    const taskId = taskController.createTask(actualTask);
+    tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
-    taskContainer.classList.add("task-container");
-    taskCheckboxButton.classList.add("task-checkbox-button");
-    taskTitle.classList.add("task-title");
-    taskEditButton.classList.add("task-edit-button");
-    taskDeleteButton.classList.add("task-delete-button");
-
-    taskTitle.textContent = inputTaskName.value;
-
-    taskContainer.appendChild(taskCheckboxButton);
-    taskContainer.appendChild(taskTitle);
-    taskContainer.appendChild(taskEditButton);
-    taskContainer.appendChild(taskDeleteButton);
-
-    tasksContainer.appendChild(taskContainer);
-
-    hideTaskMenu();
+    hideTaskMenuFromNew();
   }
 
-  function openTaskMenu() {}
+  function updateTask() {
+    updateActualTask();
 
-  function hideTaskMenu() {
-    const newTask = document.querySelector(".new-task-container");
+    taskController.updateTask(actualId, actualTask);
+    // update task
+
+    hideTaskMenuFromUpdate();
+  }
+
+  function updateActualTask() {
+    const inputTaskName = document.querySelector(".input-task-name");
+    actualTask.name = inputTaskName.value;
+  }
+
+  function hideTaskMenuFromNew() {
+    const taskMenuContainer = document.querySelector(".task-menu-container");
     const addTaskButton = document.querySelector(".add-task-button");
 
-    newTask.remove();
+    taskMenuContainer.remove();
     addTaskButton.classList.remove("hide");
+  }
+
+  function hideTaskMenuFromUpdate() {
+    const taskMenuContainer = document.querySelector(".task-menu-container");
+    const task = document.querySelector(`#${actualId}`);
+
+    taskMenuContainer.remove();
+    task.classList.remove("hide");
   }
 
   return { setUp };

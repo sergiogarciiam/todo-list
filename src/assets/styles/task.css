@@ -1,0 +1,44 @@
+.tasks-container {
+  width: 50%;
+}
+
+.task-container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+
+  border-radius: 15px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.task-checkbox-button {
+  height: 20px;
+  width: 20px;
+  align-self: center;
+
+  border: 1px solid var(--letter-color);
+  border-radius: 5px;
+
+  background-color: var(--header-color);
+  cursor: pointer;
+}
+
+.task-container > p {
+  font-size: 1.3rem;
+}
+
+.task-edit-button,
+.task-delete-button {
+  cursor: pointer;
+  opacity: 0;
+}
+
+.task-edit-button {
+  margin-left: auto;
+}
+
+.task-container:hover > .task-edit-button,
+.task-container:hover > .task-delete-button {
+  opacity: 1;
+}

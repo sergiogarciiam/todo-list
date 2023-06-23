@@ -1,0 +1,89 @@
+.task-menu-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 20px;
+  border-radius: 20px;
+
+  background-color: var(--header-color);
+}
+
+.tasks-container .task-menu-container {
+  width: 100%;
+}
+
+/* NAME CONTAINER */
+.new-task-name-container {
+  display: flex;
+  gap: 20px;
+}
+
+.task-edit-button,
+.task-delete-button,
+.new-task-name-container > button {
+  height: 20px;
+  width: 20px;
+  align-self: center;
+
+  background-color: var(--header-color);
+  border: 1px solid var(--letter-color);
+
+  border-radius: 5px;
+}
+
+.new-task-name-container > input {
+  width: 100%;
+
+  color: var(--letter-color);
+  background-color: var(--header-color);
+  padding: 10px;
+
+  font-size: 1.2rem;
+}
+
+/* FEATURES CONTAINER */
+.new-task-features-container {
+  display: flex;
+  gap: 20px;
+
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--mark-color);
+}
+
+/* DESCRIPTION AREA */
+.description-area {
+  min-height: 100px;
+  color: var(--letter-color);
+  background-color: var(--header-color);
+
+  font-size: 1.1rem;
+  padding: 10px;
+
+  resize: none;
+}
+
+/* BUTTONS CONTAINER */
+.new-task-buttons-container {
+  display: flex;
+  gap: 20px;
+  align-self: flex-end;
+}
+
+.new-task-buttons-container > button {
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background-color: var(--mark-color);
+  color: var(--letter-color);
+
+  cursor: pointer;
+  transition: opacity 300ms;
+}
+
+.new-task-buttons-container > button:hover {
+  opacity: 0.6;
+}
