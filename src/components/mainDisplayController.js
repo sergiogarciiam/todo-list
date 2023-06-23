@@ -3,6 +3,7 @@ import { sidebarComponent } from "./sidebar";
 import { inboxComponent } from "./inbox";
 import { todayComponent } from "./today";
 import { weekComponent } from "./week";
+import { projectsComponent } from "./projects";
 
 const mainDisplayController = (() => {
   let pageContainer = null;
@@ -34,12 +35,17 @@ const mainDisplayController = (() => {
     pageContainer.appendChild(weekComponent.setUp());
   };
 
+  const setProjects = () => {
+    removeMain();
+    pageContainer.appendChild(projectsComponent.setUp());
+  };
+
   function removeMain() {
     const main = document.querySelector("main");
     main.remove();
   }
 
-  return { setUp, setInbox, setToday, setWeek };
+  return { setUp, setInbox, setToday, setWeek, setProjects };
 })();
 
 export { mainDisplayController };

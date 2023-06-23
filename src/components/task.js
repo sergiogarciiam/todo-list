@@ -1,4 +1,4 @@
-import { taskController } from "../utils/taskController";
+import { tasksController } from "../util/tasksController";
 import { taskMenuComponent } from "./taskMenu";
 
 const taskComponent = (() => {
@@ -31,7 +31,7 @@ const taskComponent = (() => {
   function openTaskMenu(event) {
     const taskContainer = event.target;
     const id = taskContainer.id;
-    const task = taskController.getTask(id.substring(2));
+    const task = tasksController.getTask(id.substring(2));
 
     const taskMenu = taskMenuComponent.setUp(id, task);
     const tasksContainer = taskContainer.parentNode;

@@ -1,4 +1,3 @@
-import { taskController } from "../utils/taskController";
 import { taskMenuComponent } from "./taskMenu";
 
 const addNewTaskButton = (() => {

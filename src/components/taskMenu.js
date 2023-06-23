@@ -1,4 +1,4 @@
-import { taskController } from "../utils/taskController";
+import { tasksController } from "../util/tasksController";
 import { taskComponent } from "./task";
 
 const taskMenuComponent = (() => {
@@ -91,7 +91,7 @@ const taskMenuComponent = (() => {
 
     const tasksContainer = document.querySelector(".tasks-container");
 
-    const taskId = taskController.createTask(actualTask);
+    const taskId = tasksController.createTask(actualTask);
     tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
@@ -100,7 +100,7 @@ const taskMenuComponent = (() => {
   function updateTask() {
     updateActualTask();
 
-    taskController.updateTask(actualId, actualTask);
+    tasksController.updateTask(actualId.substring(2), actualTask);
     // update task
 
     hideTaskMenuFromUpdate();
