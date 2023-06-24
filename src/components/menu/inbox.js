@@ -1,6 +1,6 @@
-import { tasksController } from "../utils/tasksController";
-import { addNewTaskButton } from "./addNewTask";
-import { taskComponent } from "./task";
+import { tasksController } from "../../utils/tasksController";
+import { addNewTaskButton } from "../tasks/addNewTask";
+import { taskComponent } from "../tasks/task";
 
 const inboxComponent = (() => {
   const setUp = () => {

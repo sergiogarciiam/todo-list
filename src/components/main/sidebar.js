@@ -1,4 +1,4 @@
-import { mainDisplayController } from "./mainDisplayController";
+import { mainDisplayController } from "../mainDisplayController";
 
 const sidebarComponent = (() => {
   const setUp = () => {
@@ -25,7 +25,7 @@ const sidebarComponent = (() => {
     inbox.addEventListener("click", mainDisplayController.setInbox);
     today.addEventListener("click", mainDisplayController.setToday);
     week.addEventListener("click", mainDisplayController.setWeek);
-    projects.addEventListener("click", mainDisplayController.setProjects);
+    //projects.addEventListener("click", mainDisplayController.setProjects);
 
     sidebarButtonsContainer.appendChild(inbox);
     sidebarButtonsContainer.appendChild(today);

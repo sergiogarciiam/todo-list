@@ -1,4 +1,4 @@
-import { tasksController } from "../util/tasksController";
+import { tasksController } from "../../utils/tasksController";
 import { taskMenuComponent } from "./taskMenu";
 
 const taskComponent = (() => {

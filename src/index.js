@@ -1,5 +1,5 @@
 import { mainDisplayController } from "./components/mainDisplayController";
-import { projectsController } from "./util/projectsController";
+import { projectsController } from "./utils/projectsController";
 import { tasksController } from "./utils/tasksController";
 
 import "./assets/styles/header.css";

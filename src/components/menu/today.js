@@ -1,4 +1,4 @@
-import { addNewTaskButton } from "./addNewTask";
+import { addNewTaskButton } from "../tasks/addNewTask";
 
 const todayComponent = (() => {
   const setUp = () => {
