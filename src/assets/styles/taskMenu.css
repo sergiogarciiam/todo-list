@@ -1,4 +1,5 @@
 .task-menu-container {
+  position: relative;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -8,8 +9,11 @@
   border-radius: 20px;
 
   background-color: var(--header-color);
+
+  z-index: 2;
 }
 
+.day-container .task-menu-container,
 .tasks-container .task-menu-container {
   width: 100%;
 }

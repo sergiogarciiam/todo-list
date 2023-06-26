@@ -98,7 +98,7 @@ const taskMenuComponent = (() => {
     actualTask = updateActualTask();
 
     tasksController.updateTask(actualId.substring(2), actualTask);
-    // update task
+    taskComponent.updateTask(actualId.substring(2), actualTask);
 
     hideTaskMenuFromUpdate();
   }
@@ -124,17 +124,21 @@ const taskMenuComponent = (() => {
   function hideTaskMenuFromNew() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
     const addTaskButton = document.querySelector(".add-task-button");
+    const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
     addTaskButton.classList.remove("hide");
+    blocker.classList.add("hide");
   }
 
   function hideTaskMenuFromUpdate() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
     const task = document.querySelector(`#${actualId}`);
+    const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
     task.classList.remove("hide");
+    blocker.classList.add("hide");
   }
 
   function createProjectSelection() {

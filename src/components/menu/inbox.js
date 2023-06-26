@@ -12,6 +12,7 @@ const inboxComponent = (() => {
     inboxTitle.classList.add("inbox-title");
     inboxTitle.textContent = "Inbox";
 
+    inboxContainer.appendChild(createBlocker());
     inboxContainer.appendChild(inboxTitle);
     inboxContainer.appendChild(createTasksContainer());
     inboxContainer.appendChild(addNewTaskButton.setUp());
@@ -36,6 +37,14 @@ const inboxComponent = (() => {
     }
 
     return tasksContainer;
+  }
+
+  function createBlocker() {
+    const blocker = document.createElement("div");
+    blocker.classList.add("blocker");
+    blocker.classList.add("hide");
+
+    return blocker;
   }
 
   return { setUp };

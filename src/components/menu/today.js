@@ -12,6 +12,7 @@ const todayComponent = (() => {
     todayTitle.classList.add("today-title");
     todayTitle.textContent = "Today";
 
+    todayContainer.appendChild(createBlocker());
     todayContainer.appendChild(todayTitle);
     todayContainer.appendChild(createTasksContainer());
     todayContainer.appendChild(addNewTaskButton.setUp());
@@ -36,6 +37,14 @@ const todayComponent = (() => {
     }
 
     return tasksContainer;
+  }
+
+  function createBlocker() {
+    const blocker = document.createElement("div");
+    blocker.classList.add("blocker");
+    blocker.classList.add("hide");
+
+    return blocker;
   }
 
   return { setUp };

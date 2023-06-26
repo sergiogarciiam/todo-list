@@ -40,6 +40,7 @@ const weekComponent = (() => {
 
     dayTitle.textContent = day;
 
+    dayContainer.appendChild(createBlocker());
     dayContainer.appendChild(dayTitle);
     dayContainer.appendChild(createTasksContainer(numberDay));
     dayContainer.appendChild(addNewTaskButton.setUp());
@@ -80,6 +81,14 @@ const weekComponent = (() => {
       Saturday: 5,
       Sunday: 6,
     }[day];
+  }
+
+  function createBlocker() {
+    const blocker = document.createElement("div");
+    blocker.classList.add("blocker");
+    blocker.classList.add("hide");
+
+    return blocker;
   }
 
   return { setUp };

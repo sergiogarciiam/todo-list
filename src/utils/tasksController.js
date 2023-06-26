@@ -18,8 +18,6 @@ const tasksController = (() => {
     const taskId = totalTasks;
     tasksDictionary[totalTasks] = task;
     totalTasks++;
-
-    console.log(task);
     return taskId;
   };
 

@@ -16,10 +16,11 @@ const addNewTaskButton = (() => {
     event.target.classList.add("hide");
 
     const parent = event.target.parentNode;
-
     const task = createTask(parent);
+    const blocker = document.querySelector(".blocker");
 
     parent.appendChild(taskMenuComponent.setUp(null, task));
+    blocker.classList.remove("hide");
   }
 
   function createTask(parent) {
