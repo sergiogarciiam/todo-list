@@ -5,6 +5,10 @@ const tasksController = (() => {
   const setUp = () => {
     let task = {
       name: "Hello",
+      project: "Inbox",
+      priority: "1",
+      date: "",
+      description: "Bye!!",
     };
     tasksDictionary[totalTasks] = task;
     totalTasks = 1;
@@ -14,11 +18,14 @@ const tasksController = (() => {
     const taskId = totalTasks;
     tasksDictionary[totalTasks] = task;
     totalTasks++;
+
+    console.log(task);
     return taskId;
   };
 
   const updateTask = (id, task) => {
     tasksDictionary[id] = task;
+    console.log(task);
   };
 
   const getTask = (id) => {

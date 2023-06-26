@@ -1,4 +1,7 @@
+import { dateController } from "../../utils/dateController";
+import { tasksController } from "../../utils/tasksController";
 import { addNewTaskButton } from "../tasks/addNewTask";
+import { taskComponent } from "../tasks/task";
 
 const weekComponent = (() => {
   const setUp = () => {
@@ -30,19 +33,53 @@ const weekComponent = (() => {
   function createDay(day) {
     const dayContainer = document.createElement("div");
     const dayTitle = document.createElement("h2");
-    const tasksContainer = document.createElement("div");
+    const numberDay = getNumberDay(day);
 
     dayContainer.classList.add("day-container");
     dayTitle.classList.add("day-title");
-    tasksContainer.classList.add("tasks-container");
 
     dayTitle.textContent = day;
 
     dayContainer.appendChild(dayTitle);
-    dayContainer.appendChild(tasksContainer);
+    dayContainer.appendChild(createTasksContainer(numberDay));
     dayContainer.appendChild(addNewTaskButton.setUp());
 
     return dayContainer;
+  }
+
+  function createTasksContainer(numberDay) {
+    const tasksContainer = document.createElement("div");
+    const tasksDictionary = tasksController.getAllTasks();
+
+    tasksContainer.classList.add("tasks-container");
+    console.log(dateController.getNextDayOfWeek(numberDay));
+
+    for (var key in tasksDictionary) {
+      if (tasksDictionary.hasOwnProperty(key)) {
+        if (
+          tasksDictionary[key].date ===
+          dateController.getNextDayOfWeek(numberDay)
+        ) {
+          tasksContainer.appendChild(
+            taskComponent.setUp(key, tasksDictionary[key])
+          );
+        }
+      }
+    }
+
+    return tasksContainer;
+  }
+
+  function getNumberDay(day) {
+    return {
+      Monday: 0,
+      Tuesday: 1,
+      Wednesday: 2,
+      Thursday: 3,
+      Friday: 4,
+      Saturday: 5,
+      Sunday: 6,
+    }[day];
   }
 
   return { setUp };

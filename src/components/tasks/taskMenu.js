@@ -38,15 +38,11 @@ const taskMenuComponent = (() => {
 
   function createNewTaskFeaturesContainer() {
     const newTaskFeaturesContainer = document.createElement("div");
-    const projectsSelection = document.createElement("select");
-    const dueDateSelection = document.createElement("select");
-    const prioritySelection = document.createElement("select");
-
     newTaskFeaturesContainer.classList.add("new-task-features-container");
 
-    newTaskFeaturesContainer.appendChild(projectsSelection);
-    newTaskFeaturesContainer.appendChild(dueDateSelection);
-    newTaskFeaturesContainer.appendChild(prioritySelection);
+    newTaskFeaturesContainer.appendChild(createProjectSelection());
+    newTaskFeaturesContainer.appendChild(createPrioritySelection());
+    newTaskFeaturesContainer.appendChild(createDueDate());
 
     return newTaskFeaturesContainer;
   }
@@ -54,6 +50,7 @@ const taskMenuComponent = (() => {
   function createNewTaskDescriptionContainer() {
     const descriptionArea = document.createElement("textarea");
     descriptionArea.classList.add("description-area");
+    descriptionArea.value = actualTask.description;
     return descriptionArea;
   }
 
@@ -87,18 +84,18 @@ const taskMenuComponent = (() => {
   }
 
   function addTask() {
-    updateActualTask();
+    actualTask = updateActualTask();
 
     const tasksContainer = document.querySelector(".tasks-container");
-
     const taskId = tasksController.createTask(actualTask);
+
     tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
   }
 
   function updateTask() {
-    updateActualTask();
+    actualTask = updateActualTask();
 
     tasksController.updateTask(actualId.substring(2), actualTask);
     // update task
@@ -107,8 +104,21 @@ const taskMenuComponent = (() => {
   }
 
   function updateActualTask() {
+    const newActualTask = actualTask;
+
     const inputTaskName = document.querySelector(".input-task-name");
-    actualTask.name = inputTaskName.value;
+    const projectsSelection = document.querySelector(".project-select");
+    const prioritySelection = document.querySelector(".priority-select");
+    const dueDate = document.querySelector(".due-date-input");
+    const description = document.querySelector(".description-area");
+
+    newActualTask.name = inputTaskName.value;
+    newActualTask.project = projectsSelection.value;
+    newActualTask.priority = prioritySelection.value;
+    newActualTask.date = dueDate.value;
+    newActualTask.description = description.value;
+
+    return newActualTask;
   }
 
   function hideTaskMenuFromNew() {
@@ -125,6 +135,41 @@ const taskMenuComponent = (() => {
 
     taskMenuContainer.remove();
     task.classList.remove("hide");
+  }
+
+  function createProjectSelection() {
+    const projectsSelection = document.createElement("select");
+    projectsSelection.classList.add("project-select");
+
+    projectsSelection.add(new Option("Inbox", "Inbox"));
+
+    projectsSelection.value = actualTask.project;
+
+    return projectsSelection;
+  }
+
+  function createPrioritySelection() {
+    const prioritySelection = document.createElement("select");
+    prioritySelection.classList.add("priority-select");
+
+    prioritySelection.add(new Option("Priority 1", 1));
+    prioritySelection.add(new Option("Priority 2", 2));
+    prioritySelection.add(new Option("Priority 3", 3));
+    prioritySelection.add(new Option("Priority 4", 4));
+
+    prioritySelection.value = actualTask.priority;
+
+    return prioritySelection;
+  }
+
+  function createDueDate() {
+    const dueDateInput = document.createElement("input");
+    dueDateInput.classList.add("due-date-input");
+    dueDateInput.type = "date";
+
+    dueDateInput.value = actualTask.date;
+
+    return dueDateInput;
   }
 
   return { setUp };

@@ -27,9 +27,11 @@ const inboxComponent = (() => {
 
     for (var key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
-        tasksContainer.appendChild(
-          taskComponent.setUp(key, tasksDictionary[key])
-        );
+        if (tasksDictionary[key].project === "Inbox") {
+          tasksContainer.appendChild(
+            taskComponent.setUp(key, tasksDictionary[key])
+          );
+        }
       }
     }
 
