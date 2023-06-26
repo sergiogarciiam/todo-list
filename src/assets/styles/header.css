@@ -10,3 +10,21 @@
   box-shadow: 2px 2px 5px var(--shadow-color);
   z-index: 1;
 }
+
+.header-container > button {
+  background-color: var(--header-color);
+  border: none;
+
+  font-size: 1.3rem;
+  color: var(--letter-color);
+
+  padding: 8px;
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: background-color 300ms;
+}
+
+.header-container > button:hover {
+  background-color: var(--mark-color);
+}

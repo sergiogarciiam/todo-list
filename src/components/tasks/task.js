@@ -1,3 +1,4 @@
+import { getPriorityColor } from "../../utils/priority";
 import { tasksController } from "../../utils/tasksController";
 import { taskMenuComponent } from "./taskMenu";
 
@@ -5,28 +6,38 @@ const taskComponent = (() => {
   const setUp = (taskId, task) => {
     const taskContainer = document.createElement("div");
     const taskCheckboxButton = document.createElement("button");
+    const checkIcon = document.createElement("i");
     const taskTitle = document.createElement("p");
     const taskProject = document.createElement("p");
     const taskDate = document.createElement("p");
     const taskEditButton = document.createElement("button");
+    const editIcon = document.createElement("i");
     const taskDeleteButton = document.createElement("button");
+    const deleteIcon = document.createElement("i");
 
     taskContainer.addEventListener("click", openTaskMenu);
     taskContainer.id = `id${taskId}`;
 
     taskContainer.classList.add("task-container");
     taskCheckboxButton.classList.add("task-checkbox-button");
+    checkIcon.className = "fa-solid fa-check";
     taskTitle.classList.add("task-title");
     taskProject.classList.add("task-project");
     taskDate.classList.add("task-date");
     taskEditButton.classList.add("task-edit-button");
+    editIcon.className = "fa-solid fa-pen";
     taskDeleteButton.classList.add("task-delete-button");
+    deleteIcon.className = "fa-solid fa-trash";
 
     taskTitle.textContent = task.name;
     taskProject.textContent = task.project;
     taskDate.textContent = task.date;
 
     taskCheckboxButton.style.backgroundColor = getPriorityColor(task.priority);
+
+    taskCheckboxButton.appendChild(checkIcon);
+    taskEditButton.appendChild(editIcon);
+    taskDeleteButton.appendChild(deleteIcon);
 
     taskContainer.appendChild(taskCheckboxButton);
     taskContainer.appendChild(taskTitle);
@@ -76,10 +87,6 @@ const taskComponent = (() => {
     tasksContainer.insertBefore(taskMenu, taskContainer.nextSibling);
     taskContainer.classList.add("hide");
     blocker.classList.remove("hide");
-  }
-
-  function getPriorityColor(priority) {
-    return { 1: "red", 2: "orange", 3: "blue", 4: "" }[priority];
   }
 
   return { setUp, updateTask };

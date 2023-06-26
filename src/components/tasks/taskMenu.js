@@ -1,5 +1,7 @@
 import { tasksController } from "../../utils/tasksController";
 import { taskComponent } from "./task";
+import { dateController } from "../../utils/dateController";
+import { getPriorityColor } from "../../utils/priority";
 
 const taskMenuComponent = (() => {
   let actualId = null;
@@ -25,13 +27,27 @@ const taskMenuComponent = (() => {
     const newTaskNameContainer = document.createElement("div");
     const checkbox = document.createElement("button");
     const inputTaskName = document.createElement("input");
+    const deleteButton = document.createElement("button");
+    const checkIcon = document.createElement("i");
+    const deleteIcon = document.createElement("i");
 
+    checkbox.classList.add("task-checkbox-button");
     newTaskNameContainer.classList.add("new-task-name-container");
     inputTaskName.classList.add("input-task-name");
+    deleteButton.classList.add("task-delete-button");
+
+    checkIcon.className = "fa-solid fa-check";
+    deleteIcon.className = "fa-solid fa-trash";
+
     inputTaskName.value = actualTask.name;
+    checkbox.style.backgroundColor = getPriorityColor(actualTask.priority);
+
+    checkbox.appendChild(checkIcon);
+    deleteButton.appendChild(deleteIcon);
 
     newTaskNameContainer.appendChild(checkbox);
     newTaskNameContainer.appendChild(inputTaskName);
+    if (actualId !== null) newTaskNameContainer.appendChild(deleteButton);
 
     return newTaskNameContainer;
   }
@@ -86,10 +102,14 @@ const taskMenuComponent = (() => {
   function addTask() {
     actualTask = updateActualTask();
 
-    const tasksContainer = document.querySelector(".tasks-container");
+    const taskMenu = document.querySelector(".task-menu-container");
+    const tasksContainer =
+      taskMenu.parentNode.querySelector(".tasks-container");
+
     const taskId = tasksController.createTask(actualTask);
 
-    tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
+    if (isCorrectDate(tasksContainer.parentNode))
+      tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
   }
@@ -123,7 +143,8 @@ const taskMenuComponent = (() => {
 
   function hideTaskMenuFromNew() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
-    const addTaskButton = document.querySelector(".add-task-button");
+    const addTaskButton =
+      taskMenuContainer.parentNode.querySelector(".add-task-button");
     const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
@@ -174,6 +195,24 @@ const taskMenuComponent = (() => {
     dueDateInput.value = actualTask.date;
 
     return dueDateInput;
+  }
+
+  function isCorrectDate(container) {
+    let bool = true;
+    let correctDate = null;
+
+    if (container.classList.contains("today-container")) {
+      correctDate = dateController.getTodayDate();
+    } else if (container.classList.contains("day-container")) {
+      const dayOfWeek = Array.from(container.parentNode.children).indexOf(
+        container
+      );
+      correctDate = dateController.getNextDayOfWeek(dayOfWeek);
+    }
+
+    if (correctDate !== null && actualTask.date !== correctDate) bool = false;
+
+    return bool;
   }
 
   return { setUp };

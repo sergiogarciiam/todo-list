@@ -24,27 +24,24 @@
   gap: 20px;
 }
 
-.task-edit-button,
-.task-delete-button,
-.new-task-name-container > button {
-  height: 20px;
-  width: 20px;
-  align-self: center;
-
-  background-color: var(--header-color);
-  border: 1px solid var(--letter-color);
-
-  border-radius: 5px;
-}
-
 .new-task-name-container > input {
-  width: 100%;
+  flex: 0.8;
 
   color: var(--letter-color);
   background-color: var(--header-color);
   padding: 10px;
 
   font-size: 1.2rem;
+}
+
+.new-task-name-container .task-delete-button {
+  background-color: var(--header-color);
+  opacity: 1;
+  margin-left: auto;
+}
+
+.new-task-name-container .task-delete-button:hover {
+  background-color: var(--mark-color);
 }
 
 /* FEATURES CONTAINER */
@@ -54,6 +51,14 @@
 
   padding-bottom: 20px;
   border-bottom: 1px solid var(--mark-color);
+}
+
+.new-task-features-container > select,
+.new-task-features-container > input {
+  background-color: var(--header-color);
+  color: var(--letter-color);
+  padding: 3px;
+  border-radius: 5px;
 }
 
 /* DESCRIPTION AREA */

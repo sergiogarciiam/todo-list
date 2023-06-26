@@ -19,6 +19,7 @@ main {
   font-size: 1.2rem;
 
   cursor: pointer;
+  transition: 300ms;
 }
 
 .add-task-button:hover {
