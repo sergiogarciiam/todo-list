@@ -42,6 +42,11 @@
 
 .task-title {
   font-size: 1.3rem;
+  transition: 300ms;
+}
+
+.complete {
+  text-decoration: line-through;
 }
 
 .task-project,

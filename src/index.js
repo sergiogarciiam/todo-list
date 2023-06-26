@@ -8,6 +8,7 @@ import "./assets/styles/main.css";
 import "./assets/styles/week.css";
 import "./assets/styles/task.css";
 import "./assets/styles/taskMenu.css";
+import "./assets/styles/deleteMenu.css";
 import "./assets/styles/global.css";
 
 import "@fortawesome/fontawesome-free/js/fontawesome";
