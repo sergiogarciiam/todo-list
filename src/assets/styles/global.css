@@ -32,3 +32,23 @@ body {
 .hide {
   display: none;
 }
+
+/* BUTTONS */
+.delete-menu-container button,
+.new-task-buttons-container > button {
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background-color: var(--mark-color);
+  color: var(--letter-color);
+
+  cursor: pointer;
+  transition: opacity 300ms;
+}
+
+.delete-menu-container button:hover,
+.new-task-buttons-container > button:hover {
+  opacity: 0.6;
+}

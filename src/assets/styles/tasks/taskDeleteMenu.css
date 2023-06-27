@@ -20,17 +20,3 @@
   display: flex;
   gap: 10px;
 }
-
-.delete-menu-container button {
-  padding: 10px;
-  color: var(--letter-color);
-  background-color: var(--mark-color);
-  border: none;
-  border-radius: 10px;
-
-  cursor: pointer;
-}
-
-.delete-menu-container button:hover {
-  opacity: 0.7;
-}
