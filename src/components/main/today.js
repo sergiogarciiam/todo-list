@@ -1,7 +1,7 @@
 import { dateController } from "../../utils/dateController";
 import { tasksController } from "../../utils/tasksController";
-import { addNewButton } from "../element/addNewButton";
-import { element } from "../element/element";
+import { addNewTaskButton } from "../tasks/addNewTaskButton";
+import { taskComponent } from "../tasks/task";
 
 const todayComponent = (() => {
   const setUp = () => {
@@ -15,7 +15,7 @@ const todayComponent = (() => {
     todayContainer.appendChild(createBlocker());
     todayContainer.appendChild(todayTitle);
     todayContainer.appendChild(createTasksContainer());
-    todayContainer.appendChild(addNewButton.setUpAddTask());
+    todayContainer.appendChild(addNewTaskButton.setUp());
 
     return todayContainer;
   };
@@ -30,7 +30,7 @@ const todayComponent = (() => {
       if (tasksDictionary.hasOwnProperty(key)) {
         if (tasksDictionary[key].date === dateController.getTodayDate()) {
           tasksContainer.appendChild(
-            element.setUpTask(key, tasksDictionary[key])
+            taskComponent.setUp(key, tasksDictionary[key])
           );
         }
       }

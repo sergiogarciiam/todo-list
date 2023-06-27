@@ -1,16 +1,14 @@
 import { tasksController } from "../../utils/tasksController";
-import { element } from "./element";
+import { taskComponent } from "./task";
 import { dateController } from "../../utils/dateController";
 import { getPriorityColor } from "../../utils/priority";
-import { deleteMenu } from "./deleteMenu";
-import { projectsController } from "../../utils/projectsController";
+import { deleteMenu } from "../deleteMenu";
 
-const elementMenu = (() => {
+const taskMenuComponent = (() => {
   let actualId = null;
   let actualTask = null;
 
-  // PUBLIC FUNCTIONS
-  const setUpTaskMenu = (id, task) => {
+  const setUp = (id, task) => {
     actualId = id;
     actualTask = task;
 
@@ -19,20 +17,6 @@ const elementMenu = (() => {
 
     taskMenuContainer.appendChild(createNameContainer());
     taskMenuContainer.appendChild(createFeaturesContainer());
-    taskMenuContainer.appendChild(createDescriptionContainer());
-    taskMenuContainer.appendChild(createButtonsContainer());
-
-    return taskMenuContainer;
-  };
-
-  const setUpProjectMenu = (id, project) => {
-    actualId = id;
-    actualTask = project;
-
-    const taskMenuContainer = document.createElement("div");
-    taskMenuContainer.classList.add("task-menu-container");
-
-    taskMenuContainer.appendChild(createNameContainer());
     taskMenuContainer.appendChild(createDescriptionContainer());
     taskMenuContainer.appendChild(createButtonsContainer());
 
@@ -130,18 +114,9 @@ const elementMenu = (() => {
   // UTIL FEATURES CONTAINER
   function createProjectSelection() {
     const projectsSelection = document.createElement("select");
-    const projectsDictionary = projectsController.getAllProjects();
 
     projectsSelection.classList.add("project-select");
     projectsSelection.add(new Option("Inbox", "Inbox"));
-
-    for (var key in projectsDictionary) {
-      if (projectsDictionary.hasOwnProperty(key)) {
-        const projectName = projectsDictionary[key].name;
-        projectsSelection.add(new Option(projectName, projectName));
-      }
-    }
-
     projectsSelection.value = actualTask.project;
 
     return projectsSelection;
@@ -181,7 +156,7 @@ const elementMenu = (() => {
     const taskId = tasksController.createTask(actualTask);
 
     if (isCorrectDate(tasksContainer.parentNode))
-      tasksContainer.appendChild(element.setUpTask(taskId, actualTask));
+      tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
   }
@@ -190,7 +165,7 @@ const elementMenu = (() => {
     actualTask = updateActualTask();
 
     tasksController.updateTask(actualId.substring(2), actualTask);
-    element.updateTask(actualId.substring(2), actualTask);
+    taskComponent.updateTask(actualId.substring(2), actualTask);
 
     hideTaskMenuFromUpdate();
   }
@@ -198,7 +173,7 @@ const elementMenu = (() => {
   function hideTaskMenuFromNew() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
     const addTaskButton =
-      taskMenuContainer.parentNode.querySelector(".add-task-button");
+      taskMenuContainer.parentNode.querySelector(".add-button");
     const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
@@ -208,7 +183,7 @@ const elementMenu = (() => {
 
   function hideTaskMenuFromUpdate() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
-    const task = document.querySelector(`#${actualId}`);
+    const task = document.querySelector(`ta#${actualId}`);
     const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
@@ -255,7 +230,7 @@ const elementMenu = (() => {
     return Array.from(mainContainer.parentNode.children).indexOf(mainContainer);
   }
 
-  return { setUpTaskMenu, setUpProjectMenu };
+  return { setUp };
 })();
 
-export { elementMenu };
+export { taskMenuComponent };

@@ -1,6 +1,6 @@
 import { projectsController } from "../../utils/projectsController";
-import { addNewButton } from "../element/addNewButton";
-import { element } from "../element/element";
+import { addNewProjectButton } from "../projects/addNewProjectButton";
+import { projectComponent } from "../projects/project";
 
 const projectsComponent = (() => {
   const setUp = () => {
@@ -15,7 +15,7 @@ const projectsComponent = (() => {
     projectsContainer.appendChild(createBlocker());
     projectsContainer.appendChild(projectsTitle);
     projectsContainer.appendChild(createProjectsSubContainer());
-    projectsContainer.appendChild(addNewButton.setUpAddProject());
+    projectsContainer.appendChild(addNewProjectButton.setUp());
 
     return projectsContainer;
   };
@@ -29,7 +29,7 @@ const projectsComponent = (() => {
     for (var key in projectsDictionary) {
       if (projectsDictionary.hasOwnProperty(key)) {
         projectsSubContainer.appendChild(
-          element.setUpProject(key, projectsDictionary[key])
+          projectComponent.setUp(key, projectsDictionary[key])
         );
       }
     }

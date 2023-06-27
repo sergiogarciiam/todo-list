@@ -72,6 +72,7 @@
 }
 
 /* BUTTONS */
+.project-quick-button,
 .task-edit-button,
 .task-delete-button {
   height: 20px;
@@ -89,6 +90,7 @@
   transition: background-color 300ms;
 }
 
+.project-quick-button:hover,
 .task-edit-button:hover,
 .task-delete-button:hover {
   background-color: var(--mark-color);
@@ -99,7 +101,12 @@
 }
 
 .task-container:hover > .task-edit-button,
-.task-container:hover > .task-delete-button {
+.task-container:hover > .task-delete-button,
+.task-container:hover > .project-quick-button {
+  opacity: 1;
+}
+
+.quick-active {
   opacity: 1;
 }
 

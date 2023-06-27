@@ -1,6 +1,6 @@
 import { tasksController } from "../../utils/tasksController";
-import { addNewButton } from "../element/addNewButton";
-import { element } from "../element/element";
+import { addNewTaskButton } from "../tasks/addNewTaskButton";
+import { taskComponent } from "../tasks/task";
 
 const inboxComponent = (() => {
   const setUp = () => {
@@ -15,7 +15,7 @@ const inboxComponent = (() => {
     inboxContainer.appendChild(createBlocker());
     inboxContainer.appendChild(inboxTitle);
     inboxContainer.appendChild(createTasksContainer());
-    inboxContainer.appendChild(addNewButton.setUpAddTask());
+    inboxContainer.appendChild(addNewTaskButton.setUp());
 
     return inboxContainer;
   };
@@ -30,7 +30,7 @@ const inboxComponent = (() => {
       if (tasksDictionary.hasOwnProperty(key)) {
         if (tasksDictionary[key].project === "Inbox") {
           tasksContainer.appendChild(
-            element.setUpTask(key, tasksDictionary[key])
+            taskComponent.setUp(key, tasksDictionary[key])
           );
         }
       }

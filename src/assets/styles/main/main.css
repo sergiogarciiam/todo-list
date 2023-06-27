@@ -9,7 +9,7 @@ main {
   margin: 50px 0 0 500px;
 }
 
-.add-task-button {
+.add-button {
   color: var(--second-letter-color);
   background-color: var(--background-color);
   border: none;
@@ -22,7 +22,7 @@ main {
   transition: 300ms;
 }
 
-.add-task-button:hover {
+.add-button:hover {
   border: 1px solid var(--second-letter-color);
   opacity: 0.5;
 }

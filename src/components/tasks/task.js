@@ -1,12 +1,11 @@
 import { getPriorityColor } from "../../utils/priority";
-import { projectsController } from "../../utils/projectsController";
 import { tasksController } from "../../utils/tasksController";
-import { deleteMenu } from "./deleteMenu";
-import { elementMenu } from "./elementMenu";
+import { deleteMenu } from "../deleteMenu";
+import { taskMenuComponent } from "./taskMenu";
 
-const element = (() => {
+const taskComponent = (() => {
   // PUBLIC FUNCTIONS
-  const setUpTask = (id, task) => {
+  const setUp = (id, task) => {
     const taskContainer = document.createElement("div");
     const taskCheckbox = document.createElement("button");
     const checkIcon = document.createElement("i");
@@ -81,40 +80,6 @@ const element = (() => {
       taskContainer.insertBefore(taskDate, taskEditButton);
   };
 
-  const setUpProject = (id, project) => {
-    const projectContainer = document.createElement("div");
-    const projectPoint = document.createElement("div");
-    const projectTitle = document.createElement("p");
-    const projectEditButton = document.createElement("button");
-    const editIcon = document.createElement("i");
-    const projectDeleteButton = document.createElement("button");
-    const deleteIcon = document.createElement("i");
-
-    projectContainer.addEventListener("click", doAction);
-    projectContainer.id = `pr${id}`;
-
-    projectContainer.classList.add("task-container");
-    projectPoint.classList.add("project-point");
-    projectTitle.classList.add("task-title");
-    projectEditButton.classList.add("task-edit-button");
-    projectDeleteButton.classList.add("task-delete-button");
-
-    editIcon.className = "fa-solid fa-pen";
-    deleteIcon.className = "fa-solid fa-trash";
-
-    projectTitle.textContent = project.name;
-
-    projectEditButton.appendChild(editIcon);
-    projectDeleteButton.appendChild(deleteIcon);
-
-    projectContainer.appendChild(projectPoint);
-    projectContainer.appendChild(projectTitle);
-    projectContainer.appendChild(projectEditButton);
-    projectContainer.appendChild(projectDeleteButton);
-
-    return projectContainer;
-  };
-
   // UTIL SETUP FUNCTIONS
   function doAction(event) {
     const target = event.target;
@@ -148,7 +113,7 @@ const element = (() => {
     const taskContainer = target;
     const id = taskContainer.id;
     const task = tasksController.getTask(id.substring(2));
-    const taskMenu = elementMenu.setUpTaskMenu(id, task);
+    const taskMenu = taskMenuComponent.setUp(id, task);
     const tasksContainer = taskContainer.parentNode;
     const blocker = document.querySelector(".blocker");
 
@@ -164,6 +129,7 @@ const element = (() => {
       .querySelector(".task-checkbox-button")
       .querySelector("svg");
 
+    console.log(check);
     tasksController.toggleCompleteTask(id);
     title.classList.toggle("complete");
     check.classList.toggle("complete");
@@ -171,17 +137,12 @@ const element = (() => {
 
   function openDeleteMenu(taskContainer) {
     const id = taskContainer.id;
-    let element = null;
-    if (id.slice(0, 2) == "ta") {
-      element = tasksController.getTask(id.substring(2));
-    } else {
-      element = projectsController.getProject(id.substring(2));
-    }
+    const task = tasksController.getTask(id.substring(2));
 
-    taskContainer.appendChild(deleteMenu.setUp(id, element));
+    taskContainer.appendChild(deleteMenu.setUp(id, task));
   }
 
-  return { setUpTask, updateTask, setUpProject };
+  return { setUp, updateTask };
 })();
 
-export { element };
+export { taskComponent };

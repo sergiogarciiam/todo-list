@@ -5,6 +5,7 @@ const projectsController = (() => {
   const setUp = () => {
     let project = {
       name: "Project 1",
+      description: "",
       quick: true,
     };
     projectsDictionary[totalProjects] = project;
@@ -35,6 +36,10 @@ const projectsController = (() => {
     return projectsDictionary;
   };
 
+  const toggleQuick = (id) => {
+    projectsDictionary[id].quick = projectsDictionary[id].quick ? false : true;
+  };
+
   return {
     setUp,
     createProject,
@@ -42,6 +47,7 @@ const projectsController = (() => {
     getProject,
     deleteProject,
     getAllProjects,
+    toggleQuick,
   };
 })();
 
