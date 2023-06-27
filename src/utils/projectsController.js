@@ -5,6 +5,8 @@ const projectsController = (() => {
   const setUp = () => {
     let project = {
       name: "Project 1",
+      color: "red",
+      quick: false,
     };
     projectsDictionary[totalProjects] = project;
     totalProjects = 1;

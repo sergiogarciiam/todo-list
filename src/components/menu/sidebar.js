@@ -25,7 +25,7 @@ const sidebarComponent = (() => {
     inbox.addEventListener("click", mainDisplayController.setInbox);
     today.addEventListener("click", mainDisplayController.setToday);
     week.addEventListener("click", mainDisplayController.setWeek);
-    //projects.addEventListener("click", mainDisplayController.setProjects);
+    projects.addEventListener("click", mainDisplayController.setProjects);
 
     buttonsContainer.appendChild(inbox);
     buttonsContainer.appendChild(today);

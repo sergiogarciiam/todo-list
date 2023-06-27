@@ -1,11 +1,12 @@
 import { getPriorityColor } from "../../utils/priority";
+import { projectsController } from "../../utils/projectsController";
 import { tasksController } from "../../utils/tasksController";
-import { taskDeleteMenuComponent } from "./taskDeleteMenu";
-import { taskMenuComponent } from "./taskMenu";
+import { deleteMenu } from "./deleteMenu";
+import { elementMenu } from "./elementMenu";
 
-const taskComponent = (() => {
+const element = (() => {
   // PUBLIC FUNCTIONS
-  const setUp = (id, task) => {
+  const setUpTask = (id, task) => {
     const taskContainer = document.createElement("div");
     const taskCheckbox = document.createElement("button");
     const checkIcon = document.createElement("i");
@@ -18,7 +19,7 @@ const taskComponent = (() => {
     const deleteIcon = document.createElement("i");
 
     taskContainer.addEventListener("click", doAction);
-    taskContainer.id = `id${id}`;
+    taskContainer.id = `ta${id}`;
 
     taskContainer.classList.add("task-container");
     taskCheckbox.classList.add("task-checkbox-button");
@@ -80,6 +81,41 @@ const taskComponent = (() => {
       taskContainer.insertBefore(taskDate, taskEditButton);
   };
 
+  const setUpProject = (id, project) => {
+    const projectContainer = document.createElement("div");
+    const projectPoint = document.createElement("div");
+    const projectTitle = document.createElement("p");
+    const projectEditButton = document.createElement("button");
+    const editIcon = document.createElement("i");
+    const projectDeleteButton = document.createElement("button");
+    const deleteIcon = document.createElement("i");
+
+    projectContainer.addEventListener("click", doAction);
+    projectContainer.id = `pr${id}`;
+
+    projectContainer.classList.add("task-container");
+    projectPoint.classList.add("project-point");
+    projectTitle.classList.add("task-title");
+    projectEditButton.classList.add("task-edit-button");
+    projectDeleteButton.classList.add("task-delete-button");
+
+    editIcon.className = "fa-solid fa-pen";
+    deleteIcon.className = "fa-solid fa-trash";
+
+    projectTitle.textContent = project.name;
+    projectPoint.style.backgroundColor = project.color;
+
+    projectEditButton.appendChild(editIcon);
+    projectDeleteButton.appendChild(deleteIcon);
+
+    projectContainer.appendChild(projectPoint);
+    projectContainer.appendChild(projectTitle);
+    projectContainer.appendChild(projectEditButton);
+    projectContainer.appendChild(projectDeleteButton);
+
+    return projectContainer;
+  };
+
   // UTIL SETUP FUNCTIONS
   function doAction(event) {
     const target = event.target;
@@ -113,7 +149,7 @@ const taskComponent = (() => {
     const taskContainer = target;
     const id = taskContainer.id;
     const task = tasksController.getTask(id.substring(2));
-    const taskMenu = taskMenuComponent.setUp(id, task);
+    const taskMenu = elementMenu.setUpTaskMenu(id, task);
     const tasksContainer = taskContainer.parentNode;
     const blocker = document.querySelector(".blocker");
 
@@ -129,7 +165,6 @@ const taskComponent = (() => {
       .querySelector(".task-checkbox-button")
       .querySelector("svg");
 
-    console.log(check);
     tasksController.toggleCompleteTask(id);
     title.classList.toggle("complete");
     check.classList.toggle("complete");
@@ -137,12 +172,17 @@ const taskComponent = (() => {
 
   function openDeleteMenu(taskContainer) {
     const id = taskContainer.id;
-    const task = tasksController.getTask(id.substring(2));
+    let element = null;
+    if (id.slice(0, 2) == "ta") {
+      element = tasksController.getTask(id.substring(2));
+    } else {
+      element = projectsController.getProject(id.substring(2));
+    }
 
-    taskContainer.appendChild(taskDeleteMenuComponent.setUp(id, task));
+    taskContainer.appendChild(deleteMenu.setUp(id, element));
   }
 
-  return { setUp, updateTask };
+  return { setUpTask, updateTask, setUpProject };
 })();
 
-export { taskComponent };
+export { element };

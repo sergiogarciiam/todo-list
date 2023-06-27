@@ -1,7 +1,7 @@
 import { dateController } from "../../utils/dateController";
 import { tasksController } from "../../utils/tasksController";
-import { addNewTaskButton } from "../tasks/addNewTask";
-import { taskComponent } from "../tasks/task";
+import { addNewButton } from "../element/addNewButton";
+import { element } from "../element/element";
 
 const weekComponent = (() => {
   const setUp = () => {
@@ -43,7 +43,7 @@ const weekComponent = (() => {
     dayContainer.appendChild(createBlocker());
     dayContainer.appendChild(dayTitle);
     dayContainer.appendChild(createTasksContainer(numberDay));
-    dayContainer.appendChild(addNewTaskButton.setUp());
+    dayContainer.appendChild(addNewButton.setUpAddTask());
 
     return dayContainer;
   }
@@ -53,7 +53,6 @@ const weekComponent = (() => {
     const tasksDictionary = tasksController.getAllTasks();
 
     tasksContainer.classList.add("tasks-container");
-    console.log(dateController.getNextDayOfWeek(numberDay));
 
     for (var key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
@@ -62,7 +61,7 @@ const weekComponent = (() => {
           dateController.getNextDayOfWeek(numberDay)
         ) {
           tasksContainer.appendChild(
-            taskComponent.setUp(key, tasksDictionary[key])
+            element.setUpTask(key, tasksDictionary[key])
           );
         }
       }

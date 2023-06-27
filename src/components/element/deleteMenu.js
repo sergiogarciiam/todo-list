@@ -1,6 +1,7 @@
+import { projectsController } from "../../utils/projectsController";
 import { tasksController } from "../../utils/tasksController";
 
-const taskDeleteMenuComponent = (() => {
+const deleteMenu = (() => {
   let actualId = null;
 
   const setUp = (id, task) => {
@@ -18,7 +19,7 @@ const taskDeleteMenuComponent = (() => {
     confirmButton.textContent = "Delete";
     cancelButton.textContent = "Cancel";
 
-    confirmButton.addEventListener("click", deleteTask);
+    confirmButton.addEventListener("click", deleteElement);
     cancelButton.addEventListener("click", hideDeleteMenu);
 
     buttonsContainer.appendChild(cancelButton);
@@ -30,11 +31,15 @@ const taskDeleteMenuComponent = (() => {
     return deleteMenuContainer;
   };
 
-  function deleteTask(event) {
+  function deleteElement(event) {
     const taskContainer = event.target.parentNode.parentNode.parentNode;
     const blocker = document.querySelector(".blocker");
 
-    tasksController.deleteTask(actualId.substring(2));
+    if (actualId.slice(0, 2) == "ta") {
+      tasksController.deleteTask(actualId.substring(2));
+    } else {
+      projectsController.deleteProject(actualId.substring(2));
+    }
     taskContainer.remove();
     blocker.classList.add("hide");
   }
@@ -50,4 +55,4 @@ const taskDeleteMenuComponent = (() => {
   return { setUp };
 })();
 
-export { taskDeleteMenuComponent };
+export { deleteMenu };

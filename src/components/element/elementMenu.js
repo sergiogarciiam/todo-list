@@ -1,14 +1,15 @@
 import { tasksController } from "../../utils/tasksController";
-import { taskComponent } from "./task";
+import { element } from "./element";
 import { dateController } from "../../utils/dateController";
 import { getPriorityColor } from "../../utils/priority";
-import { taskDeleteMenuComponent } from "./taskDeleteMenu";
+import { deleteMenu } from "./deleteMenu";
 
-const taskMenuComponent = (() => {
+const elementMenu = (() => {
   let actualId = null;
   let actualTask = null;
 
-  const setUp = (id, task) => {
+  // PUBLIC FUNCTIONS
+  const setUpTaskMenu = (id, task) => {
     actualId = id;
     actualTask = task;
 
@@ -17,6 +18,20 @@ const taskMenuComponent = (() => {
 
     taskMenuContainer.appendChild(createNameContainer());
     taskMenuContainer.appendChild(createFeaturesContainer());
+    taskMenuContainer.appendChild(createDescriptionContainer());
+    taskMenuContainer.appendChild(createButtonsContainer());
+
+    return taskMenuContainer;
+  };
+
+  const setUpProjectMenu = (id, project) => {
+    actualId = id;
+    actualTask = project;
+
+    const taskMenuContainer = document.createElement("div");
+    taskMenuContainer.classList.add("task-menu-container");
+
+    taskMenuContainer.appendChild(createNameContainer());
     taskMenuContainer.appendChild(createDescriptionContainer());
     taskMenuContainer.appendChild(createButtonsContainer());
 
@@ -108,9 +123,7 @@ const taskMenuComponent = (() => {
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
-    taskMenuContainer.appendChild(
-      taskDeleteMenuComponent.setUp(actualId, actualTask)
-    );
+    taskMenuContainer.appendChild(deleteMenu.setUp(actualId, actualTask));
   }
 
   // UTIL FEATURES CONTAINER
@@ -158,7 +171,7 @@ const taskMenuComponent = (() => {
     const taskId = tasksController.createTask(actualTask);
 
     if (isCorrectDate(tasksContainer.parentNode))
-      tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
+      tasksContainer.appendChild(element.setUpTask(taskId, actualTask));
 
     hideTaskMenuFromNew();
   }
@@ -167,7 +180,7 @@ const taskMenuComponent = (() => {
     actualTask = updateActualTask();
 
     tasksController.updateTask(actualId.substring(2), actualTask);
-    taskComponent.updateTask(actualId.substring(2), actualTask);
+    element.updateTask(actualId.substring(2), actualTask);
 
     hideTaskMenuFromUpdate();
   }
@@ -232,7 +245,7 @@ const taskMenuComponent = (() => {
     return Array.from(mainContainer.parentNode.children).indexOf(mainContainer);
   }
 
-  return { setUp };
+  return { setUpTaskMenu, setUpProjectMenu };
 })();
 
-export { taskMenuComponent };
+export { elementMenu };
