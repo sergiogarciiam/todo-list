@@ -59,7 +59,7 @@ const element = (() => {
   };
 
   const updateTask = (id, task) => {
-    const taskContainer = document.querySelector(`#id${id}`);
+    const taskContainer = document.querySelector(`#ta${id}`);
     const taskTitle = taskContainer.querySelector(".task-title");
     const taskCheckbox = taskContainer.querySelector(".task-checkbox-button");
     const taskProject = taskContainer.querySelector(".task-project");
@@ -103,7 +103,6 @@ const element = (() => {
     deleteIcon.className = "fa-solid fa-trash";
 
     projectTitle.textContent = project.name;
-    projectPoint.style.backgroundColor = project.color;
 
     projectEditButton.appendChild(editIcon);
     projectDeleteButton.appendChild(deleteIcon);

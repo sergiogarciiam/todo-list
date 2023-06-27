@@ -20,7 +20,7 @@
   gap: 20px;
 }
 
-.sidebar-buttons-container > button {
+.sidebar-container button {
   padding: 5px;
   text-align: left;
   font-size: 1.1rem;
@@ -35,12 +35,20 @@
   transition: background-color 300ms;
 }
 
-.sidebar-buttons-container > button:hover {
+.sidebar-container button:hover {
   background-color: var(--mark-color);
 }
 
+/* quick-access */
 .quick-access {
   color: var(--second-letter-color);
+}
+
+.quick-projects {
+  display: flex;
+  flex-direction: column;
+
+  margin: 20px 0 0 20px;
 }
 
 /* source link */

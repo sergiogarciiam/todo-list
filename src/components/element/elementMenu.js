@@ -3,6 +3,7 @@ import { element } from "./element";
 import { dateController } from "../../utils/dateController";
 import { getPriorityColor } from "../../utils/priority";
 import { deleteMenu } from "./deleteMenu";
+import { projectsController } from "../../utils/projectsController";
 
 const elementMenu = (() => {
   let actualId = null;
@@ -129,9 +130,18 @@ const elementMenu = (() => {
   // UTIL FEATURES CONTAINER
   function createProjectSelection() {
     const projectsSelection = document.createElement("select");
+    const projectsDictionary = projectsController.getAllProjects();
 
     projectsSelection.classList.add("project-select");
     projectsSelection.add(new Option("Inbox", "Inbox"));
+
+    for (var key in projectsDictionary) {
+      if (projectsDictionary.hasOwnProperty(key)) {
+        const projectName = projectsDictionary[key].name;
+        projectsSelection.add(new Option(projectName, projectName));
+      }
+    }
+
     projectsSelection.value = actualTask.project;
 
     return projectsSelection;

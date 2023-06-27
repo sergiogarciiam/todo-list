@@ -47,6 +47,7 @@
   height: 12px;
   border-radius: 50px;
   align-self: center;
+  background-color: var(--letter-color);
 }
 
 /* TITLE */

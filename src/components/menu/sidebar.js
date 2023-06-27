@@ -1,3 +1,4 @@
+import { projectsController } from "../../utils/projectsController";
 import { mainDisplayController } from "../mainDisplayController";
 
 const sidebarComponent = (() => {
@@ -45,6 +46,7 @@ const sidebarComponent = (() => {
     quickAccessTitle.textContent = "Quick Access";
 
     quickAccessContainer.appendChild(quickAccessTitle);
+    quickAccessContainer.appendChild(createQuickProjects());
 
     return quickAccessContainer;
   }
@@ -63,6 +65,30 @@ const sidebarComponent = (() => {
     button.textContent = name;
 
     return button;
+  }
+
+  function createQuickProjects() {
+    const quickProjects = document.createElement("div");
+    const projectsDictionary = projectsController.getAllProjects();
+
+    quickProjects.classList.add("quick-projects");
+
+    for (var key in projectsDictionary) {
+      if (projectsDictionary.hasOwnProperty(key)) {
+        if (projectsDictionary[key].quick)
+          quickProjects.appendChild(
+            createProject(projectsDictionary[key].name)
+          );
+      }
+    }
+
+    return quickProjects;
+  }
+
+  function createProject(name) {
+    const project = document.createElement("button");
+    project.textContent = name;
+    return project;
   }
 
   return { setUp };
