@@ -43,6 +43,7 @@
   color: var(--second-letter-color);
 }
 
+/* source link */
 .source-link {
   margin-top: auto;
 
@@ -55,6 +56,7 @@
   text-decoration: underline;
 }
 
+/* animation */
 .sidebar-hide {
   transform: translateX(-100px);
   opacity: 0;

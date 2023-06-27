@@ -1,9 +1,9 @@
-import { headerComponent } from "./main/header";
-import { sidebarComponent } from "./main/sidebar";
-import { inboxComponent } from "./menu/inbox";
-import { todayComponent } from "./menu/today";
-import { weekComponent } from "./menu/week";
-import { projectsComponent } from "./menu/projects";
+import { headerComponent } from "./menu/header";
+import { sidebarComponent } from "./menu/sidebar";
+import { inboxComponent } from "./main/inbox";
+import { todayComponent } from "./main/today";
+import { weekComponent } from "./main/week";
+import { projectsComponent } from "./main/projects";
 
 const mainDisplayController = (() => {
   let pageContainer = null;

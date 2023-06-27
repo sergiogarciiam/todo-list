@@ -15,15 +15,15 @@ const addNewTaskButton = (() => {
   function openTaskMenu(event) {
     event.target.classList.add("hide");
 
-    const parent = event.target.parentNode;
-    const task = createTask(parent);
+    const mainContainer = event.target.parentNode;
+    const task = createTask(mainContainer);
     const blocker = document.querySelector(".blocker");
 
-    parent.appendChild(taskMenuComponent.setUp(null, task));
+    mainContainer.appendChild(taskMenuComponent.setUp(null, task));
     blocker.classList.remove("hide");
   }
 
-  function createTask(parent) {
+  function createTask(mainContainer) {
     let task = {
       name: "",
       project: "Inbox",
@@ -33,14 +33,18 @@ const addNewTaskButton = (() => {
       complete: false,
     };
 
-    if (parent.classList.contains("today-container")) {
+    if (mainContainer.classList.contains("today-container")) {
       task.date = dateController.getTodayDate();
-    } else if (parent.classList.contains("day-container")) {
-      var dayOfWeek = Array.from(parent.parentNode.children).indexOf(parent);
+    } else if (mainContainer.classList.contains("day-container")) {
+      const dayOfWeek = getDayOfWeek(mainContainer);
       task.date = dateController.getNextDayOfWeek(dayOfWeek);
     }
 
     return task;
+  }
+
+  function getDayOfWeek(mainContainer) {
+    return Array.from(mainContainer.parentNode.children).indexOf(mainContainer);
   }
 
   return { setUp };

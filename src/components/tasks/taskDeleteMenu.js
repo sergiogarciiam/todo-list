@@ -1,9 +1,10 @@
 import { tasksController } from "../../utils/tasksController";
 
 const taskDeleteMenuComponent = (() => {
-  let actualTaskId = null;
-  const setUp = (taskId, task) => {
-    actualTaskId = taskId;
+  let actualId = null;
+
+  const setUp = (id, task) => {
+    actualId = id;
 
     const deleteMenuContainer = document.createElement("div");
     const confirmMessage = document.createElement("p");
@@ -33,15 +34,16 @@ const taskDeleteMenuComponent = (() => {
     const taskContainer = event.target.parentNode.parentNode.parentNode;
     const blocker = document.querySelector(".blocker");
 
-    tasksController.deleteTask(actualTaskId.substring(2));
+    tasksController.deleteTask(actualId.substring(2));
     taskContainer.remove();
     blocker.classList.add("hide");
   }
 
   function hideDeleteMenu(event) {
     const deleteMenu = event.target.parentNode.parentNode;
-    deleteMenu.remove();
     const blocker = document.querySelector(".blocker");
+
+    deleteMenu.remove();
     blocker.classList.add("hide");
   }
 

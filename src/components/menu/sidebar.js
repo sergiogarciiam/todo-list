@@ -5,34 +5,34 @@ const sidebarComponent = (() => {
     const sidebarContainer = document.createElement("nav");
     sidebarContainer.classList.add("sidebar-container");
 
-    sidebarContainer.appendChild(createSidebarButtonsContainer());
+    sidebarContainer.appendChild(createButtonsContainer());
     sidebarContainer.appendChild(createQuickAccessContainer());
     sidebarContainer.appendChild(createSourceLink());
 
     return sidebarContainer;
   };
 
-  function createSidebarButtonsContainer() {
-    const sidebarButtonsContainer = document.createElement("div");
+  function createButtonsContainer() {
+    const buttonsContainer = document.createElement("div");
 
     const inbox = createButton("Inbox");
     const today = createButton("Today");
     const week = createButton("Week");
     const projects = createButton("Projects");
 
-    sidebarButtonsContainer.classList.add("sidebar-buttons-container");
+    buttonsContainer.classList.add("sidebar-buttons-container");
 
     inbox.addEventListener("click", mainDisplayController.setInbox);
     today.addEventListener("click", mainDisplayController.setToday);
     week.addEventListener("click", mainDisplayController.setWeek);
     //projects.addEventListener("click", mainDisplayController.setProjects);
 
-    sidebarButtonsContainer.appendChild(inbox);
-    sidebarButtonsContainer.appendChild(today);
-    sidebarButtonsContainer.appendChild(week);
-    sidebarButtonsContainer.appendChild(projects);
+    buttonsContainer.appendChild(inbox);
+    buttonsContainer.appendChild(today);
+    buttonsContainer.appendChild(week);
+    buttonsContainer.appendChild(projects);
 
-    return sidebarButtonsContainer;
+    return buttonsContainer;
   }
 
   function createQuickAccessContainer() {

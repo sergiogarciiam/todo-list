@@ -2,8 +2,8 @@ const headerComponent = (() => {
   const setUp = () => {
     const headerContainer = document.createElement("header");
     const sidebarButton = document.createElement("button");
-    const icon = document.createElement("i");
     const profileHolder = document.createElement("div");
+    const icon = document.createElement("i");
 
     headerContainer.classList.add("header-container");
     sidebarButton.classList.add("sidebar-button");

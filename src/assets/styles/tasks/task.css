@@ -18,6 +18,7 @@
   cursor: pointer;
 }
 
+/* CHECKBOX */
 .task-checkbox-button {
   height: 20px;
   width: 20px;
@@ -40,6 +41,7 @@
   opacity: 1;
 }
 
+/* TITLE */
 .task-title {
   font-size: 1.3rem;
   transition: 300ms;
@@ -50,6 +52,7 @@
   opacity: 1;
 }
 
+/* FEATURES */
 .task-project,
 .task-date {
   font-size: 0.8rem;
@@ -59,6 +62,7 @@
   align-items: center;
 }
 
+/* BUTTONS */
 .task-edit-button,
 .task-delete-button {
   height: 20px;
@@ -90,6 +94,7 @@
   opacity: 1;
 }
 
+/* BLOCKER */
 .blocker {
   position: absolute;
 

@@ -71,6 +71,14 @@ const weekComponent = (() => {
     return tasksContainer;
   }
 
+  function createBlocker() {
+    const blocker = document.createElement("div");
+    blocker.classList.add("blocker");
+    blocker.classList.add("hide");
+
+    return blocker;
+  }
+
   function getNumberDay(day) {
     return {
       Monday: 0,
@@ -81,14 +89,6 @@ const weekComponent = (() => {
       Saturday: 5,
       Sunday: 6,
     }[day];
-  }
-
-  function createBlocker() {
-    const blocker = document.createElement("div");
-    blocker.classList.add("blocker");
-    blocker.classList.add("hide");
-
-    return blocker;
   }
 
   return { setUp };

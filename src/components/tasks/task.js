@@ -4,9 +4,10 @@ import { taskDeleteMenuComponent } from "./taskDeleteMenu";
 import { taskMenuComponent } from "./taskMenu";
 
 const taskComponent = (() => {
-  const setUp = (taskId, task) => {
+  // PUBLIC FUNCTIONS
+  const setUp = (id, task) => {
     const taskContainer = document.createElement("div");
-    const taskCheckboxButton = document.createElement("button");
+    const taskCheckbox = document.createElement("button");
     const checkIcon = document.createElement("i");
     const taskTitle = document.createElement("p");
     const taskProject = document.createElement("p");
@@ -17,10 +18,10 @@ const taskComponent = (() => {
     const deleteIcon = document.createElement("i");
 
     taskContainer.addEventListener("click", doAction);
-    taskContainer.id = `id${taskId}`;
+    taskContainer.id = `id${id}`;
 
     taskContainer.classList.add("task-container");
-    taskCheckboxButton.classList.add("task-checkbox-button");
+    taskCheckbox.classList.add("task-checkbox-button");
     taskTitle.classList.add("task-title");
     taskProject.classList.add("task-project");
     taskDate.classList.add("task-date");
@@ -35,18 +36,18 @@ const taskComponent = (() => {
     taskProject.textContent = task.project;
     taskDate.textContent = task.date;
 
-    taskCheckboxButton.style.backgroundColor = getPriorityColor(task.priority);
+    taskCheckbox.style.backgroundColor = getPriorityColor(task.priority);
 
     if (task.complete) {
       checkIcon.classList.add("complete");
       taskTitle.classList.add("complete");
     }
 
-    taskCheckboxButton.appendChild(checkIcon);
+    taskCheckbox.appendChild(checkIcon);
     taskEditButton.appendChild(editIcon);
     taskDeleteButton.appendChild(deleteIcon);
 
-    taskContainer.appendChild(taskCheckboxButton);
+    taskContainer.appendChild(taskCheckbox);
     taskContainer.appendChild(taskTitle);
     taskContainer.appendChild(taskProject);
     if (taskDate.textContent !== "") taskContainer.appendChild(taskDate);
@@ -56,12 +57,10 @@ const taskComponent = (() => {
     return taskContainer;
   };
 
-  const updateTask = (taskId, task) => {
-    const taskContainer = document.querySelector(`#id${taskId}`);
+  const updateTask = (id, task) => {
+    const taskContainer = document.querySelector(`#id${id}`);
     const taskTitle = taskContainer.querySelector(".task-title");
-    const taskCheckboxButton = taskContainer.querySelector(
-      ".task-checkbox-button"
-    );
+    const taskCheckbox = taskContainer.querySelector(".task-checkbox-button");
     const taskProject = taskContainer.querySelector(".task-project");
     const taskEditButton = taskContainer.querySelector(".task-edit-button");
 
@@ -69,7 +68,7 @@ const taskComponent = (() => {
 
     taskTitle.textContent = task.name;
     taskProject.textContent = task.project;
-    taskCheckboxButton.style.backgroundColor = getPriorityColor(task.priority);
+    taskCheckbox.style.backgroundColor = getPriorityColor(task.priority);
 
     if (taskDate !== null) taskDate.remove();
 
@@ -81,6 +80,7 @@ const taskComponent = (() => {
       taskContainer.insertBefore(taskDate, taskEditButton);
   };
 
+  // UTIL SETUP FUNCTIONS
   function doAction(event) {
     const target = event.target;
     const targetClass = target.classList;
@@ -108,14 +108,13 @@ const taskComponent = (() => {
       blocker.classList.remove("hide");
     }
   }
+
   function openTaskMenu(target) {
     const taskContainer = target;
     const id = taskContainer.id;
     const task = tasksController.getTask(id.substring(2));
-
     const taskMenu = taskMenuComponent.setUp(id, task);
     const tasksContainer = taskContainer.parentNode;
-
     const blocker = document.querySelector(".blocker");
 
     tasksContainer.insertBefore(taskMenu, taskContainer.nextSibling);
