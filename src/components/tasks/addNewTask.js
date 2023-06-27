@@ -30,6 +30,7 @@ const addNewTaskButton = (() => {
       priority: "4",
       date: "",
       description: "",
+      complete: false,
     };
 
     if (parent.classList.contains("today-container")) {

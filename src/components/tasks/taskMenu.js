@@ -2,6 +2,7 @@ import { tasksController } from "../../utils/tasksController";
 import { taskComponent } from "./task";
 import { dateController } from "../../utils/dateController";
 import { getPriorityColor } from "../../utils/priority";
+import { taskDeleteMenuComponent } from "./taskDeleteMenu";
 
 const taskMenuComponent = (() => {
   let actualId = null;
@@ -42,6 +43,9 @@ const taskMenuComponent = (() => {
     inputTaskName.value = actualTask.name;
     checkbox.style.backgroundColor = getPriorityColor(actualTask.priority);
 
+    deleteIcon.addEventListener("click", openDeleteMenu);
+    deleteButton.addEventListener("click", openDeleteMenu);
+
     checkbox.appendChild(checkIcon);
     deleteButton.appendChild(deleteIcon);
 
@@ -50,6 +54,13 @@ const taskMenuComponent = (() => {
     if (actualId !== null) newTaskNameContainer.appendChild(deleteButton);
 
     return newTaskNameContainer;
+  }
+
+  function openDeleteMenu() {
+    const taskMenuContainer = document.querySelector(".task-menu-container");
+    taskMenuContainer.appendChild(
+      taskDeleteMenuComponent.setUp(actualId, actualTask)
+    );
   }
 
   function createNewTaskFeaturesContainer() {

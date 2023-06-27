@@ -31,12 +31,12 @@
   cursor: pointer;
 }
 
-.task-checkbox-button > svg {
+.fa-check {
   opacity: 0;
   transition: opacity 300ms;
 }
 
-.task-checkbox-button:hover > svg {
+.task-checkbox-button:hover .fa-check {
   opacity: 1;
 }
 
@@ -47,6 +47,7 @@
 
 .complete {
   text-decoration: line-through;
+  opacity: 1;
 }
 
 .task-project,

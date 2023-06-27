@@ -9,9 +9,10 @@ const tasksController = (() => {
       priority: "1",
       date: "",
       description: "Bye!!",
+      complete: false,
     };
     tasksDictionary[totalTasks] = task;
-    totalTasks = 1;
+    totalTasks = tasksDictionary.length;
   };
 
   const createTask = (task) => {
@@ -23,7 +24,6 @@ const tasksController = (() => {
 
   const updateTask = (id, task) => {
     tasksDictionary[id] = task;
-    console.log(task);
   };
 
   const getTask = (id) => {
@@ -38,7 +38,19 @@ const tasksController = (() => {
     return tasksDictionary;
   };
 
-  return { setUp, createTask, updateTask, getTask, deleteTask, getAllTasks };
+  const toggleCompleteTask = (id) => {
+    tasksDictionary[id].complete = tasksDictionary[id].complete ? false : true;
+  };
+
+  return {
+    setUp,
+    createTask,
+    updateTask,
+    getTask,
+    deleteTask,
+    getAllTasks,
+    toggleCompleteTask,
+  };
 })();
 
 export { tasksController };

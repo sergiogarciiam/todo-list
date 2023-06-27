@@ -37,6 +37,11 @@ const taskComponent = (() => {
 
     taskCheckboxButton.style.backgroundColor = getPriorityColor(task.priority);
 
+    if (task.complete) {
+      checkIcon.classList.add("complete");
+      taskTitle.classList.add("complete");
+    }
+
     taskCheckboxButton.appendChild(checkIcon);
     taskEditButton.appendChild(editIcon);
     taskDeleteButton.appendChild(deleteIcon);
@@ -77,26 +82,32 @@ const taskComponent = (() => {
   };
 
   function doAction(event) {
-    const targetClass = event.target.classList;
+    const target = event.target;
+    const targetClass = target.classList;
+    const parentTargetClass = target.parentNode.classList;
 
-    console.log(targetClass);
-    if (targetClass.contains("task-container")) {
-      openTaskMenu(event.target);
-    } else if (targetClass.contains("task-checkbox-button")) {
-      completeTask(event.target);
-    } else if (targetClass.contains("fa-check")) {
-      completeTask(event.target.parentNode);
-    } else if (targetClass.contains("task-edit-button")) {
-      openTaskMenu(event.target.parentNode);
-    } else if (targetClass.contains("fa-pen")) {
-      openTaskMenu(event.target.parentNode.parentNode);
-    } else if (targetClass.contains("task-delete-button")) {
-      openDeleteMenu(event.target.parentNode);
-    } else if (targetClass.contains("fa-trash")) {
-      openDeleteMenu(event.target.parentNode.parentNode);
+    if (
+      targetClass.contains("task-container") ||
+      targetClass.contains("task-edit-button") ||
+      targetClass.contains("fa-pen") ||
+      parentTargetClass.contains("fa-pen")
+    ) {
+      openTaskMenu(target.closest(".task-container"));
+    } else if (
+      targetClass.contains("task-checkbox-button") ||
+      targetClass.contains("fa-check")
+    ) {
+      completeTask(target.closest(".task-container"));
+    } else if (
+      targetClass.contains("task-delete-button") ||
+      targetClass.contains("fa-trash") ||
+      parentTargetClass.contains("fa-trash")
+    ) {
+      openDeleteMenu(target.closest(".task-container"));
+      const blocker = document.querySelector(".blocker");
+      blocker.classList.remove("hide");
     }
   }
-
   function openTaskMenu(target) {
     const taskContainer = target;
     const id = taskContainer.id;
@@ -112,18 +123,24 @@ const taskComponent = (() => {
     blocker.classList.remove("hide");
   }
 
-  function completeTask(target) {
-    const title = target.parentNode.children[1];
+  function completeTask(taskContainer) {
+    const id = taskContainer.id.substring(2);
+    const title = taskContainer.querySelector(".task-title");
+    const check = taskContainer
+      .querySelector(".task-checkbox-button")
+      .querySelector("svg");
+
+    console.log(check);
+    tasksController.toggleCompleteTask(id);
     title.classList.toggle("complete");
+    check.classList.toggle("complete");
   }
 
   function openDeleteMenu(taskContainer) {
     const id = taskContainer.id;
     const task = tasksController.getTask(id.substring(2));
 
-    taskContainer.parentNode.appendChild(
-      taskDeleteMenuComponent.setUp(id, task)
-    );
+    taskContainer.appendChild(taskDeleteMenuComponent.setUp(id, task));
   }
 
   return { setUp, updateTask };

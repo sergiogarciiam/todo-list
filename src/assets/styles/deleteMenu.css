@@ -10,6 +10,7 @@
   border-radius: 20px;
 
   background-color: var(--header-color);
+  box-shadow: 5px 5px 10px var(--shadow-color);
 
   z-index: 2;
 }
@@ -23,8 +24,13 @@
 .delete-menu-container button {
   padding: 10px;
   color: var(--letter-color);
-  background-color: var(--background-color);
+  background-color: var(--mark-color);
   border: none;
+  border-radius: 10px;
 
   cursor: pointer;
+}
+
+.delete-menu-container button:hover {
+  opacity: 0.7;
 }
