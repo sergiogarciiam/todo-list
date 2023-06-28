@@ -1,0 +1,19 @@
+.projects-back-button {
+  margin: 0 0 -70px -60px;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 10px;
+
+  background-color: var(--background-color);
+  color: var(--letter-color);
+
+  cursor: pointer;
+  transition: opacity 300ms;
+  font-size: 2rem;
+}
+
+.projects-back-button:hover {
+  background-color: var(--mark-color);
+}

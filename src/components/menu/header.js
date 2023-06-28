@@ -25,7 +25,6 @@ const headerComponent = (() => {
   function hideSidebar() {
     const sidebar = document.querySelector(".sidebar-container");
     sidebar.classList.toggle("sidebar-hide");
-    setTimeout(() => sidebar.classList.toggle("hide"), 1000);
   }
 
   return { setUp };

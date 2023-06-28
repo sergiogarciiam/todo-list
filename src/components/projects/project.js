@@ -121,23 +121,45 @@ const projectComponent = (() => {
   }
 
   function addQuickProject(projectContainer) {
+    const quickProjectsContainer = document.querySelector(".quick-projects");
     const id = projectContainer.id.substring(2);
+    const project = projectsController.getProject(id);
+
     const button = projectContainer.querySelector(".project-quick-button");
     const star = projectContainer.querySelector("svg");
 
     if (!star.classList.contains("active")) {
+      quickProjectsContainer.appendChild(createQuickProject(id, project));
+
       star.classList.remove("fa-regular");
       star.classList.add("fa-solid");
       star.classList.toggle("active");
       projectsController.toggleQuick(id);
       button.classList.toggle("quick-active");
     } else {
+      const quickProject = quickProjectsContainer.querySelector(`#quick${id}`);
+      quickProject.remove();
+
       star.classList.add("fa-regular");
       star.classList.remove("fa-solid");
       star.classList.toggle("active");
       projectsController.toggleQuick(id);
       button.classList.toggle("quick-active");
     }
+  }
+
+  function createQuickProject(id, project) {
+    const quickProject = document.createElement("button");
+    quickProject.textContent = project.name;
+    quickProject.id = `quick${id}`;
+    quickProject.addEventListener("click", openProject);
+    return quickProject;
+  }
+
+  function openProject(event) {
+    const id = event.target.id.substring(5);
+    const project = projectsController.getProject(id);
+    mainDisplayController.setSpecificProject(id, project);
   }
 
   return { setUp, updateProject };

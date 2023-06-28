@@ -1,19 +1,28 @@
 import { tasksController } from "../../utils/tasksController";
+import { mainDisplayController } from "../mainDisplayController";
 import { addNewTaskButton } from "../tasks/addNewTaskButton";
 import { taskComponent } from "../tasks/task";
 
 const specificProjectComponent = (() => {
   const setUp = (id, project) => {
     const specificProjectContainer = document.createElement("main");
+    const backButton = document.createElement("button");
     const specificProjectTitle = document.createElement("h1");
+    const backIcon = document.createElement("i");
+
+    specificProjectContainer.classList.add("specific-project-container");
+    backButton.classList.add("projects-back-button");
+    specificProjectTitle.classList.add("specific-project-title");
+    backIcon.className = "fa-solid fa-chevron-left";
 
     specificProjectContainer.id = `pr${id}`;
-    specificProjectContainer.classList.add("specific-project-container");
+    specificProjectTitle.textContent = project.name;
 
-    specificProjectTitle.classList.add("specific-project-title");
-    specificProjectTitle.textContent = `Projects > ${project.name}`;
+    backButton.addEventListener("click", mainDisplayController.setProjects);
+    backButton.appendChild(backIcon);
 
     specificProjectContainer.appendChild(createBlocker());
+    specificProjectContainer.appendChild(backButton);
     specificProjectContainer.appendChild(specificProjectTitle);
     specificProjectContainer.appendChild(createTasksContainer(id));
     specificProjectContainer.appendChild(addNewTaskButton.setUp());

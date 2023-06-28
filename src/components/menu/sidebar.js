@@ -77,7 +77,7 @@ const sidebarComponent = (() => {
       if (projectsDictionary.hasOwnProperty(key)) {
         if (projectsDictionary[key].quick)
           quickProjects.appendChild(
-            createProject(projectsDictionary[key].name)
+            createProject(key, projectsDictionary[key])
           );
       }
     }
@@ -85,10 +85,18 @@ const sidebarComponent = (() => {
     return quickProjects;
   }
 
-  function createProject(name) {
-    const project = document.createElement("button");
-    project.textContent = name;
-    return project;
+  function createProject(id, project) {
+    const quickProject = document.createElement("button");
+    quickProject.textContent = project.name;
+    quickProject.id = `quick${id}`;
+    quickProject.addEventListener("click", openProject);
+    return quickProject;
+  }
+
+  function openProject(event) {
+    const id = event.target.id.substring(5);
+    const project = projectsController.getProject(id);
+    mainDisplayController.setSpecificProject(id, project);
   }
 
   return { setUp };
