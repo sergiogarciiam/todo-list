@@ -9,13 +9,14 @@ const taskComponent = (() => {
   const setUp = (id, task) => {
     const taskContainer = document.createElement("div");
     const taskCheckbox = document.createElement("button");
-    const checkIcon = document.createElement("i");
     const taskTitle = document.createElement("p");
     const taskProject = document.createElement("p");
     const taskDate = document.createElement("p");
     const taskEditButton = document.createElement("button");
-    const editIcon = document.createElement("i");
     const taskDeleteButton = document.createElement("button");
+
+    const checkIcon = document.createElement("i");
+    const editIcon = document.createElement("i");
     const deleteIcon = document.createElement("i");
 
     taskContainer.addEventListener("click", doAction);

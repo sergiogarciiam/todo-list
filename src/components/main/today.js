@@ -7,9 +7,10 @@ const todayComponent = (() => {
   const setUp = () => {
     const todayContainer = document.createElement("main");
     const todayTitle = document.createElement("h1");
-    todayContainer.classList.add("today-container");
 
+    todayContainer.classList.add("today-container");
     todayTitle.classList.add("today-title");
+
     todayTitle.textContent = "Today";
 
     todayContainer.appendChild(createBlocker());

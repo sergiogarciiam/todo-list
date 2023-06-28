@@ -67,7 +67,8 @@ const projectComponent = (() => {
 
     if (
       targetClass.contains("task-title") ||
-      targetClass.contains("task-container")
+      targetClass.contains("task-container") ||
+      targetClass.contains("project-point")
     ) {
       openSpecificProject(target.closest(".task-container"));
     } else if (
@@ -96,6 +97,7 @@ const projectComponent = (() => {
   function openSpecificProject(targetProject) {
     const id = targetProject.id.substring(2);
     const project = projectsController.getProject(id);
+
     mainDisplayController.setSpecificProject(id, project);
   }
 

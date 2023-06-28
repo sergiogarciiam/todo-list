@@ -8,8 +8,8 @@ const projectsComponent = (() => {
     const projectsTitle = document.createElement("h1");
 
     projectsContainer.classList.add("projects-container");
-
     projectsTitle.classList.add("projects-title");
+
     projectsTitle.textContent = "Projects";
 
     projectsContainer.appendChild(createBlocker());

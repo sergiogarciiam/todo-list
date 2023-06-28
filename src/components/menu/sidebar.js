@@ -4,6 +4,7 @@ import { mainDisplayController } from "../mainDisplayController";
 const sidebarComponent = (() => {
   const setUp = () => {
     const sidebarContainer = document.createElement("nav");
+
     sidebarContainer.classList.add("sidebar-container");
 
     sidebarContainer.appendChild(createButtonsContainer());
@@ -41,8 +42,8 @@ const sidebarComponent = (() => {
     const quickAccessTitle = document.createElement("p");
 
     quickAccessContainer.classList.add("quick-access-container");
-
     quickAccessTitle.classList.add("quick-access");
+
     quickAccessTitle.textContent = "Quick Access";
 
     quickAccessContainer.appendChild(quickAccessTitle);

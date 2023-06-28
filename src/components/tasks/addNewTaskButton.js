@@ -24,7 +24,7 @@ const addNewTaskButton = (() => {
   }
 
   function createTask(mainContainer) {
-    let task = {
+    const task = {
       name: "",
       project: "Inbox",
       priority: "4",

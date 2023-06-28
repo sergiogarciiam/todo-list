@@ -6,12 +6,12 @@ const addNewProjectButton = (() => {
 
     addProjectButton.classList.add("add-button");
     addProjectButton.textContent = "+ Add Project";
-    addProjectButton.addEventListener("click", openMenu);
+    addProjectButton.addEventListener("click", openProjectMenu);
 
     return addProjectButton;
   };
 
-  function openMenu(event) {
+  function openProjectMenu(event) {
     event.target.classList.add("hide");
 
     const mainContainer = event.target.parentNode;
@@ -30,7 +30,7 @@ const addNewProjectButton = (() => {
     };
   }
 
-  return { setUp, openMenu };
+  return { setUp };
 })();
 
 export { addNewProjectButton };

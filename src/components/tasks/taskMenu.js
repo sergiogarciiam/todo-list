@@ -108,8 +108,8 @@ const taskMenuComponent = (() => {
 
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
-    const taskMenuContainer = document.querySelector(".task-menu-container");
-    taskMenuContainer.appendChild(deleteMenu.setUp(actualId, actualTask));
+    const menuContainer = document.querySelector(".task-menu-container");
+    menuContainer.appendChild(deleteMenu.setUp(actualId, actualTask));
   }
 
   // UTIL FEATURES CONTAINER

@@ -10,11 +10,10 @@ const weekComponent = (() => {
     const daysContainer = document.createElement("div");
 
     weekContainer.classList.add("week-container");
-
     todayTitle.classList.add("week-title");
-    todayTitle.textContent = "Week";
-
     daysContainer.classList.add("days-container");
+
+    todayTitle.textContent = "Week";
 
     daysContainer.appendChild(createDay("Monday"));
     daysContainer.appendChild(createDay("Tuesday"));

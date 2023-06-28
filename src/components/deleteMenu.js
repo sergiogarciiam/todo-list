@@ -35,7 +35,7 @@ const deleteMenu = (() => {
     const taskContainer = event.target.parentNode.parentNode.parentNode;
     const blocker = document.querySelector(".blocker");
 
-    if (actualId.slice(0, 2) == "ta") {
+    if (isTask()) {
       tasksController.deleteTask(actualId.substring(2));
     } else {
       projectsController.deleteProject(actualId.substring(2));
@@ -50,6 +50,10 @@ const deleteMenu = (() => {
 
     deleteMenu.remove();
     blocker.classList.add("hide");
+  }
+
+  function isTask() {
+    return actualId.slice(0, 2) === "ta";
   }
 
   return { setUp };

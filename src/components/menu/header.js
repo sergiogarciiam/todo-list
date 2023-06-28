@@ -8,12 +8,10 @@ const headerComponent = (() => {
     headerContainer.classList.add("header-container");
     sidebarButton.classList.add("sidebar-button");
     profileHolder.classList.add("profile");
+    icon.className = "fa-solid fa-bars";
 
     sidebarButton.type = "button";
     sidebarButton.addEventListener("click", hideSidebar);
-
-    icon.className = "fa-solid fa-bars";
-
     sidebarButton.appendChild(icon);
 
     headerContainer.appendChild(sidebarButton);

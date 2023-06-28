@@ -25,11 +25,13 @@ const projectsMenu = (() => {
     const nameContainer = document.createElement("div");
     const inputProjectName = document.createElement("input");
     const deleteButton = document.createElement("button");
+
     const deleteIcon = document.createElement("i");
 
     nameContainer.classList.add("new-task-name-container");
     inputProjectName.classList.add("input-task-name");
     deleteButton.classList.add("task-delete-button");
+
     deleteIcon.className = "fa-solid fa-trash";
 
     inputProjectName.value = actualProject.name;
@@ -69,10 +71,10 @@ const projectsMenu = (() => {
     confirmButton.type = "button";
 
     if (actualId === null) {
-      cancelButton.addEventListener("click", hideMenuFromNew);
+      cancelButton.addEventListener("click", hideProjectMenuFromNew);
       confirmButton.addEventListener("click", addProject);
     } else {
-      cancelButton.addEventListener("click", hideMenuFromUpdate);
+      cancelButton.addEventListener("click", hideProjectMenuFromUpdate);
       confirmButton.addEventListener("click", updateProject);
     }
 
@@ -101,7 +103,7 @@ const projectsMenu = (() => {
       projectComponent.setUp(projectId, actualProject)
     );
 
-    hideMenuFromNew();
+    hideProjectMenuFromNew();
   }
 
   function updateProject() {
@@ -110,10 +112,10 @@ const projectsMenu = (() => {
     projectsController.updateProject(actualId.substring(2), actualProject);
     projectComponent.updateProject(actualId.substring(2), actualProject);
 
-    hideMenuFromUpdate();
+    hideProjectMenuFromUpdate();
   }
 
-  function hideMenuFromNew() {
+  function hideProjectMenuFromNew() {
     const projectMenuContainer = document.querySelector(".task-menu-container");
     const addButton =
       projectMenuContainer.parentNode.querySelector(".add-button");
@@ -124,7 +126,7 @@ const projectsMenu = (() => {
     blocker.classList.add("hide");
   }
 
-  function hideMenuFromUpdate() {
+  function hideProjectMenuFromUpdate() {
     const projectMenuContainer = document.querySelector(".task-menu-container");
     const project = document.querySelector(`#${actualId}`);
     const blocker = document.querySelector(".blocker");
