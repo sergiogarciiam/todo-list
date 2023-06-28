@@ -12,7 +12,7 @@ const tasksController = (() => {
       complete: false,
     };
     tasksDictionary[totalTasks] = task;
-    totalTasks = tasksDictionary.length;
+    totalTasks = Object.keys(tasksDictionary).length;
   };
 
   const createTask = (task) => {

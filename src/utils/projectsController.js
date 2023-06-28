@@ -9,7 +9,7 @@ const projectsController = (() => {
       quick: true,
     };
     projectsDictionary[totalProjects] = project;
-    totalProjects = 1;
+    totalProjects = Object.keys(projectsDictionary).length;
   };
 
   const createProject = (project) => {
