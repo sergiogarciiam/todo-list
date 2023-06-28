@@ -1,4 +1,5 @@
 import { getPriorityColor } from "../../utils/priority";
+import { projectsController } from "../../utils/projectsController";
 import { tasksController } from "../../utils/tasksController";
 import { deleteMenu } from "../deleteMenu";
 import { taskMenuComponent } from "./taskMenu";
@@ -32,8 +33,13 @@ const taskComponent = (() => {
     editIcon.className = "fa-solid fa-pen";
     deleteIcon.className = "fa-solid fa-trash";
 
+    if (task.project === "Inbox") {
+      taskProject.textContent = task.project;
+    } else {
+      taskProject.textContent = projectsController.getProjectName(task.project);
+    }
+
     taskTitle.textContent = task.name;
-    taskProject.textContent = task.project;
     taskDate.textContent = task.date;
 
     taskCheckbox.style.backgroundColor = getPriorityColor(task.priority);
@@ -66,8 +72,13 @@ const taskComponent = (() => {
 
     let taskDate = taskContainer.querySelector(".task-date");
 
+    if (task.project === "Inbox") {
+      taskProject.textContent = task.project;
+    } else {
+      taskProject.textContent = projectsController.getProjectName(task.project);
+    }
+
     taskTitle.textContent = task.name;
-    taskProject.textContent = task.project;
     taskCheckbox.style.backgroundColor = getPriorityColor(task.priority);
 
     if (taskDate !== null) taskDate.remove();
@@ -88,6 +99,7 @@ const taskComponent = (() => {
 
     if (
       targetClass.contains("task-container") ||
+      targetClass.contains("task-title") ||
       targetClass.contains("task-edit-button") ||
       targetClass.contains("fa-pen") ||
       parentTargetClass.contains("fa-pen")
@@ -129,7 +141,6 @@ const taskComponent = (() => {
       .querySelector(".task-checkbox-button")
       .querySelector("svg");
 
-    console.log(check);
     tasksController.toggleCompleteTask(id);
     title.classList.toggle("complete");
     check.classList.toggle("complete");

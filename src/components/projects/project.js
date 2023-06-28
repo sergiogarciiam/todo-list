@@ -1,6 +1,7 @@
 import { projectsController } from "../../utils/projectsController";
 import { deleteMenu } from "../deleteMenu";
 import { projectsMenu } from "./projectMenu";
+import { mainDisplayController } from "../mainDisplayController";
 
 const projectComponent = (() => {
   // PUBLIC FUNCTIONS
@@ -51,11 +52,11 @@ const projectComponent = (() => {
     return projectContainer;
   };
 
-  const updateProject = (id, task) => {
+  const updateProject = (id, project) => {
     const projectContainer = document.querySelector(`#pr${id}`);
     const projectTitle = projectContainer.querySelector(".task-title");
 
-    projectTitle.textContent = task.name;
+    projectTitle.textContent = project.name;
   };
 
   // UTIL SETUP FUNCTIONS
@@ -65,7 +66,11 @@ const projectComponent = (() => {
     const parentTargetClass = target.parentNode.classList;
 
     if (
-      targetClass.contains("task-container") ||
+      targetClass.contains("task-title") ||
+      targetClass.contains("task-container")
+    ) {
+      openSpecificProject(target.closest(".task-container"));
+    } else if (
       targetClass.contains("task-edit-button") ||
       targetClass.contains("fa-pen") ||
       parentTargetClass.contains("fa-pen")
@@ -86,6 +91,12 @@ const projectComponent = (() => {
     ) {
       addQuickProject(target.closest(".task-container"));
     }
+  }
+
+  function openSpecificProject(targetProject) {
+    const id = targetProject.id.substring(2);
+    const project = projectsController.getProject(id);
+    mainDisplayController.setSpecificProject(id, project);
   }
 
   function openProjectMenu(target) {

@@ -38,6 +38,8 @@ const addNewTaskButton = (() => {
     } else if (mainContainer.classList.contains("day-container")) {
       const dayOfWeek = getDayOfWeek(mainContainer);
       task.date = dateController.getNextDayOfWeek(dayOfWeek);
+    } else if (mainContainer.classList.contains("specific-project-container")) {
+      task.project = mainContainer.id.substring(2);
     }
 
     return task;

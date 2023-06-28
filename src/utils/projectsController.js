@@ -40,6 +40,10 @@ const projectsController = (() => {
     projectsDictionary[id].quick = projectsDictionary[id].quick ? false : true;
   };
 
+  const getProjectName = (id) => {
+    return projectsDictionary[id].name;
+  };
+
   return {
     setUp,
     createProject,
@@ -48,6 +52,7 @@ const projectsController = (() => {
     deleteProject,
     getAllProjects,
     toggleQuick,
+    getProjectName,
   };
 })();
 

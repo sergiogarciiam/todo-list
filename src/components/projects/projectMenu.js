@@ -126,7 +126,7 @@ const projectsMenu = (() => {
 
   function hideMenuFromUpdate() {
     const projectMenuContainer = document.querySelector(".task-menu-container");
-    const project = document.querySelector(`#pr${actualId}`);
+    const project = document.querySelector(`#${actualId}`);
     const blocker = document.querySelector(".blocker");
 
     projectMenuContainer.remove();

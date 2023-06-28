@@ -66,6 +66,7 @@
 
 /* animation */
 .sidebar-hide {
+  transform-origin: left;
   transform: translateX(-100px);
   opacity: 0;
 }

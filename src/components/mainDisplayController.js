@@ -4,6 +4,7 @@ import { inboxComponent } from "./main/inbox";
 import { todayComponent } from "./main/today";
 import { weekComponent } from "./main/week";
 import { projectsComponent } from "./main/projects";
+import { specificProjectComponent } from "./main/specificProject";
 
 const mainDisplayController = (() => {
   let pageContainer = null;
@@ -40,12 +41,24 @@ const mainDisplayController = (() => {
     pageContainer.appendChild(projectsComponent.setUp());
   };
 
+  const setSpecificProject = (id, project) => {
+    removeMain();
+    pageContainer.appendChild(specificProjectComponent.setUp(id, project));
+  };
+
   function removeMain() {
     const main = document.querySelector("main");
     main.remove();
   }
 
-  return { setUp, setInbox, setToday, setWeek, setProjects };
+  return {
+    setUp,
+    setInbox,
+    setToday,
+    setWeek,
+    setProjects,
+    setSpecificProject,
+  };
 })();
 
 export { mainDisplayController };

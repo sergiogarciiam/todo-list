@@ -3,6 +3,7 @@ import { taskComponent } from "./task";
 import { dateController } from "../../utils/dateController";
 import { getPriorityColor } from "../../utils/priority";
 import { deleteMenu } from "../deleteMenu";
+import { projectsController } from "../../utils/projectsController";
 
 const taskMenuComponent = (() => {
   let actualId = null;
@@ -114,9 +115,18 @@ const taskMenuComponent = (() => {
   // UTIL FEATURES CONTAINER
   function createProjectSelection() {
     const projectsSelection = document.createElement("select");
+    const projectsDictionary = projectsController.getAllProjects();
 
     projectsSelection.classList.add("project-select");
     projectsSelection.add(new Option("Inbox", "Inbox"));
+
+    for (var key in projectsDictionary) {
+      if (projectsDictionary.hasOwnProperty(key)) {
+        const name = projectsDictionary[key].name;
+        projectsSelection.add(new Option(name, key));
+      }
+    }
+
     projectsSelection.value = actualTask.project;
 
     return projectsSelection;
@@ -155,7 +165,10 @@ const taskMenuComponent = (() => {
       taskMenu.parentNode.querySelector(".tasks-container");
     const taskId = tasksController.createTask(actualTask);
 
-    if (isCorrectDate(tasksContainer.parentNode))
+    if (
+      isCorrectDate(tasksContainer.parentNode) &&
+      isCorrectContainer(tasksContainer.parentNode)
+    )
       tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
@@ -183,7 +196,7 @@ const taskMenuComponent = (() => {
 
   function hideTaskMenuFromUpdate() {
     const taskMenuContainer = document.querySelector(".task-menu-container");
-    const task = document.querySelector(`ta#${actualId}`);
+    const task = document.querySelector(`#${actualId}`);
     const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
@@ -224,6 +237,15 @@ const taskMenuComponent = (() => {
     if (correctDate !== null && actualTask.date !== correctDate) bool = false;
 
     return bool;
+  }
+
+  function isCorrectContainer(mainContainer) {
+    return (
+      (mainContainer.classList.contains("inbox-container") &&
+        actualTask.project === "Inbox") ||
+      (mainContainer.classList.contains("specific-project-container") &&
+        actualTask.project !== "Inbox")
+    );
   }
 
   function getDateOfWeek(mainContainer) {
