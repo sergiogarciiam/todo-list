@@ -2,28 +2,25 @@ const tasksController = (() => {
   let totalTasks = 0;
   let tasksDictionary = {};
 
-  const setUp = () => {
-    let task = {
-      name: "Hello",
-      project: "Inbox",
-      priority: "1",
-      date: "",
-      description: "Bye!!",
-      complete: false,
-    };
-    tasksDictionary[totalTasks] = task;
-    totalTasks = Object.keys(tasksDictionary).length;
+  const loadTasksFromLocalStorage = () => {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      tasksDictionary = JSON.parse(storedTasks);
+      totalTasks = getMaxKey();
+    }
   };
 
   const createTask = (task) => {
     const taskId = totalTasks;
     tasksDictionary[totalTasks] = task;
     totalTasks++;
+    saveTasksToLocalStorage();
     return taskId;
   };
 
   const updateTask = (id, task) => {
     tasksDictionary[id] = task;
+    saveTasksToLocalStorage();
   };
 
   const getTask = (id) => {
@@ -32,6 +29,7 @@ const tasksController = (() => {
 
   const deleteTask = (id) => {
     delete tasksDictionary[id];
+    saveTasksToLocalStorage();
   };
 
   const getAllTasks = () => {
@@ -40,16 +38,39 @@ const tasksController = (() => {
 
   const toggleCompleteTask = (id) => {
     tasksDictionary[id].complete = tasksDictionary[id].complete ? false : true;
+    saveTasksToLocalStorage();
   };
 
+  function getMaxKey() {
+    const keys = Object.keys(tasksDictionary);
+    if (keys.length === 0) {
+      return 0;
+    }
+    return Math.max(...keys) + 1;
+  }
+
+  const deleteAllTasksFromProject = (project) => {
+    for (let key in tasksDictionary) {
+      if (tasksDictionary[key].project === project) {
+        delete tasksDictionary[key];
+      }
+      saveTasksToLocalStorage();
+    }
+  };
+
+  function saveTasksToLocalStorage() {
+    localStorage.setItem("tasks", JSON.stringify(tasksDictionary));
+  }
+
   return {
-    setUp,
+    loadTasksFromLocalStorage,
     createTask,
     updateTask,
     getTask,
     deleteTask,
     getAllTasks,
     toggleCompleteTask,
+    deleteAllTasksFromProject,
   };
 })();
 

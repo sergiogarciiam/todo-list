@@ -26,7 +26,7 @@ const todayComponent = (() => {
 
     tasksContainer.classList.add("tasks-container");
 
-    for (var key in tasksDictionary) {
+    for (let key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
         if (tasksDictionary[key].date === dateController.getTodayDate()) {
           tasksContainer.appendChild(

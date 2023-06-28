@@ -26,7 +26,7 @@ const projectsComponent = (() => {
 
     projectsSubContainer.classList.add("tasks-container");
 
-    for (var key in projectsDictionary) {
+    for (let key in projectsDictionary) {
       if (projectsDictionary.hasOwnProperty(key)) {
         projectsSubContainer.appendChild(
           projectComponent.setUp(key, projectsDictionary[key])

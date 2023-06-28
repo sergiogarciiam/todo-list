@@ -17,6 +17,6 @@ import "@fortawesome/fontawesome-free/js/solid";
 import "@fortawesome/fontawesome-free/js/regular";
 import "@fortawesome/fontawesome-free/js/brands";
 
-projectsController.setUp();
-tasksController.setUp();
+projectsController.loadProjectsFromLocalStorage();
+tasksController.loadTasksFromLocalStorage();
 mainDisplayController.setUp();
