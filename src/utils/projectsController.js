@@ -1,13 +1,27 @@
 import { tasksController } from "./tasksController";
+import { Project } from "./project";
 
 const projectsController = (() => {
   let totalProjects = 0;
   let projectsDictionary = {};
 
   const loadProjectsFromLocalStorage = () => {
-    const storedProjects = localStorage.getItem("projects");
+    let storedProjects = localStorage.getItem("projects");
+
     if (storedProjects) {
-      projectsDictionary = JSON.parse(storedProjects);
+      storedProjects = JSON.parse(storedProjects);
+
+      for (let key in storedProjects) {
+        const projectObj = storedProjects[key];
+        const project = new Project();
+
+        project.name = projectObj._name;
+        project.description = projectObj._description;
+        project.isQuick = projectObj._isQuick;
+
+        projectsDictionary[key] = project;
+      }
+
       totalProjects = getMaxKey();
     }
   };

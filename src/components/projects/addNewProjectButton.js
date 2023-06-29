@@ -1,3 +1,4 @@
+import { Project } from "../../utils/project";
 import { projectsMenu } from "./projectMenu";
 
 const addNewProjectButton = (() => {
@@ -15,19 +16,11 @@ const addNewProjectButton = (() => {
     event.target.classList.add("hide");
 
     const mainContainer = event.target.parentNode;
-    const project = createProject();
+    const project = new Project();
     const blocker = document.querySelector(".blocker");
 
     mainContainer.appendChild(projectsMenu.setUp(null, project));
     blocker.classList.remove("hide");
-  }
-
-  function createProject() {
-    return {
-      name: "",
-      description: "",
-      isQuick: false,
-    };
   }
 
   return { setUp };

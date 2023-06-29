@@ -16,7 +16,7 @@ const specificProjectComponent = (() => {
     specificProjectTitle.classList.add("specific-project-title");
     backIcon.className = "fa-solid fa-chevron-left";
 
-    specificProjectContainer.id = `pr${id}`;
+    specificProjectContainer.id = `p${id}`;
     specificProjectTitle.textContent = project.name;
 
     backButton.addEventListener("click", mainDisplayController.setProjects);

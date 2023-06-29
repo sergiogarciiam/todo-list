@@ -1,11 +1,29 @@
+import { Task } from "./task";
+
 const tasksController = (() => {
   let totalTasks = 0;
   let tasksDictionary = {};
 
   const loadTasksFromLocalStorage = () => {
-    const storedTasks = localStorage.getItem("tasks");
+    let storedTasks = localStorage.getItem("tasks");
+
     if (storedTasks) {
-      tasksDictionary = JSON.parse(storedTasks);
+      storedTasks = JSON.parse(storedTasks);
+
+      for (let key in storedTasks) {
+        const taskObj = storedTasks[key];
+        const task = new Task();
+
+        task.name = taskObj._name;
+        task.project = taskObj._project;
+        task.priority = taskObj._priority;
+        task.date = taskObj._date;
+        task.description = taskObj._description;
+        task.isComplete = taskObj._isComplete;
+
+        tasksDictionary[key] = task;
+      }
+
       totalTasks = getMaxKey();
     }
   };
@@ -43,14 +61,6 @@ const tasksController = (() => {
     saveTasksToLocalStorage();
   };
 
-  function getMaxKey() {
-    const keys = Object.keys(tasksDictionary);
-    if (keys.length === 0) {
-      return 0;
-    }
-    return Math.max(...keys) + 1;
-  }
-
   const deleteAllTasksFromProject = (project) => {
     for (let key in tasksDictionary) {
       if (tasksDictionary[key].project === project) {
@@ -59,6 +69,14 @@ const tasksController = (() => {
       saveTasksToLocalStorage();
     }
   };
+
+  function getMaxKey() {
+    const keys = Object.keys(tasksDictionary);
+    if (keys.length === 0) {
+      return 0;
+    }
+    return Math.max(...keys) + 1;
+  }
 
   function saveTasksToLocalStorage() {
     localStorage.setItem("tasks", JSON.stringify(tasksDictionary));
