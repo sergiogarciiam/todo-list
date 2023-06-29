@@ -37,7 +37,7 @@ const addNewTaskButton = (() => {
       priority: "4",
       date: "",
       description: "",
-      complete: false,
+      isComplete: false,
     };
 
     if (isTodayContainer) {

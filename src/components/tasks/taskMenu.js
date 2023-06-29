@@ -6,12 +6,12 @@ import { deleteMenu } from "../deleteMenu";
 import { projectsController } from "../../utils/projectsController";
 
 const taskMenuComponent = (() => {
-  let actualId = null;
-  let actualTask = null;
+  let currentId = null;
+  let currentTask = null;
 
   const setUp = (id, task) => {
-    actualId = id;
-    actualTask = task;
+    currentId = id;
+    currentTask = task;
 
     const taskMenuContainer = document.createElement("div");
     taskMenuContainer.classList.add("element-menu-container");
@@ -42,8 +42,8 @@ const taskMenuComponent = (() => {
     checkIcon.className = "fa-solid fa-check";
     deleteIcon.className = "fa-solid fa-trash";
 
-    inputTaskName.value = actualTask.name;
-    checkbox.style.backgroundColor = getPriorityColor(actualTask.priority);
+    inputTaskName.value = currentTask.name;
+    checkbox.style.backgroundColor = getPriorityColor(currentTask.priority);
 
     deleteIcon.addEventListener("click", openDeleteMenu);
     deleteButton.addEventListener("click", openDeleteMenu);
@@ -53,7 +53,7 @@ const taskMenuComponent = (() => {
 
     nameContainer.appendChild(checkbox);
     nameContainer.appendChild(inputTaskName);
-    if (actualId !== null) nameContainer.appendChild(deleteButton);
+    if (currentId !== null) nameContainer.appendChild(deleteButton);
 
     return nameContainer;
   }
@@ -72,7 +72,7 @@ const taskMenuComponent = (() => {
   function createDescriptionContainer() {
     const descriptionArea = document.createElement("textarea");
     descriptionArea.classList.add("description-area");
-    descriptionArea.value = actualTask.description;
+    descriptionArea.value = currentTask.description;
 
     return descriptionArea;
   }
@@ -90,7 +90,7 @@ const taskMenuComponent = (() => {
     cancelAddTaskButton.type = "button";
     confirmAddTaskButton.type = "button";
 
-    if (actualId === null) {
+    if (currentId === null) {
       cancelAddTaskButton.addEventListener("click", hideTaskMenuFromNew);
       confirmAddTaskButton.addEventListener("click", addTask);
     } else {
@@ -107,7 +107,7 @@ const taskMenuComponent = (() => {
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
     const menuContainer = document.querySelector(".element-menu-container");
-    menuContainer.appendChild(deleteMenu.setUp(actualId, actualTask));
+    menuContainer.appendChild(deleteMenu.setUp(currentId, currentTask));
   }
 
   // UTIL FEATURES CONTAINER
@@ -125,7 +125,7 @@ const taskMenuComponent = (() => {
       }
     }
 
-    projectsSelection.value = actualTask.project;
+    projectsSelection.value = currentTask.project;
 
     return projectsSelection;
   }
@@ -139,7 +139,7 @@ const taskMenuComponent = (() => {
     prioritySelection.add(new Option("Priority 3", 3));
     prioritySelection.add(new Option("Priority 4", 4));
 
-    prioritySelection.value = actualTask.priority;
+    prioritySelection.value = currentTask.priority;
 
     return prioritySelection;
   }
@@ -149,32 +149,32 @@ const taskMenuComponent = (() => {
 
     dueDateInput.classList.add("due-date-input");
     dueDateInput.type = "date";
-    dueDateInput.value = actualTask.date;
+    dueDateInput.value = currentTask.date;
 
     return dueDateInput;
   }
 
   // UTIL BUTTONS CONTAINER
   function addTask() {
-    actualTask = updateActualTask();
+    currentTask = updateActualTask();
 
     const taskMenu = document.querySelector(".element-menu-container");
     const tasksContainer = taskMenu.parentNode.querySelector(
       ".elements-container"
     );
-    const taskId = tasksController.createTask(actualTask);
+    const taskId = tasksController.createTask(currentTask);
 
     if (isCorrectContainer(tasksContainer.parentNode))
-      tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
+      tasksContainer.appendChild(taskComponent.setUp(taskId, currentTask));
 
     hideTaskMenuFromNew();
   }
 
   function updateTask() {
-    actualTask = updateActualTask();
+    currentTask = updateActualTask();
 
-    tasksController.updateTask(actualId.substring(1), actualTask);
-    taskComponent.updateTask(actualId.substring(1), actualTask);
+    tasksController.updateTask(currentId.substring(1), currentTask);
+    taskComponent.updateTask(currentId.substring(1), currentTask);
 
     hideTaskMenuFromUpdate();
   }
@@ -192,7 +192,7 @@ const taskMenuComponent = (() => {
 
   function hideTaskMenuFromUpdate() {
     const taskMenuContainer = document.querySelector(".element-menu-container");
-    const task = document.querySelector(`#${actualId}`);
+    const task = document.querySelector(`#${currentId}`);
     const blocker = document.querySelector(".blocker");
 
     taskMenuContainer.remove();
@@ -202,7 +202,7 @@ const taskMenuComponent = (() => {
 
   // MORE UTILITY
   function updateActualTask() {
-    const newActualTask = actualTask;
+    const newActualTask = currentTask;
 
     const inputTaskName = document.querySelector(".input-element-name");
     const projectsSelection = document.querySelector(".project-select");
@@ -225,19 +225,21 @@ const taskMenuComponent = (() => {
 
     if (
       mainContainer.classList.contains("inbox-container") &&
-      actualTask.project !== "Inbox"
+      currentTask.project !== "Inbox"
     ) {
       bool = false;
     } else if (mainContainer.classList.contains("today-container")) {
       correctDate = dateController.getTodayDate();
-      if (correctDate !== null && actualTask.date !== correctDate) bool = false;
+      if (correctDate !== null && currentTask.date !== correctDate)
+        bool = false;
     } else if (mainContainer.classList.contains("day-container")) {
       const dayOfWeek = getDateOfWeek(mainContainer);
       correctDate = dateController.getNextDayOfWeek(dayOfWeek);
-      if (correctDate !== null && actualTask.date !== correctDate) bool = false;
+      if (correctDate !== null && currentTask.date !== correctDate)
+        bool = false;
     } else if (
       mainContainer.classList.contains("specific-project-container") &&
-      actualTask.project === "Inbox"
+      currentTask.project === "Inbox"
     ) {
       bool = false;
     }

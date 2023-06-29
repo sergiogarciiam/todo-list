@@ -26,7 +26,7 @@ const addNewProjectButton = (() => {
     return {
       name: "",
       description: "",
-      quick: false,
+      isQuick: false,
     };
   }
 

@@ -2,10 +2,10 @@ import { projectsController } from "../utils/projectsController";
 import { tasksController } from "../utils/tasksController";
 
 const deleteMenu = (() => {
-  let actualId = null;
+  let currentId = null;
 
   const setUp = (id, task) => {
-    actualId = id;
+    currentId = id;
 
     const deleteMenuContainer = document.createElement("div");
     const confirmMessage = document.createElement("p");
@@ -36,9 +36,9 @@ const deleteMenu = (() => {
     const blocker = document.querySelector(".blocker");
 
     if (isTask()) {
-      tasksController.deleteTask(actualId.substring(1));
+      tasksController.deleteTask(currentId.substring(1));
     } else {
-      projectsController.deleteProject(actualId.substring(1));
+      projectsController.deleteProject(currentId.substring(1));
     }
     taskContainer.remove();
     blocker.classList.add("hide");
@@ -53,7 +53,7 @@ const deleteMenu = (() => {
   }
 
   function isTask() {
-    return actualId.slice(0, 1) === "t";
+    return currentId.slice(0, 1) === "t";
   }
 
   return { setUp };

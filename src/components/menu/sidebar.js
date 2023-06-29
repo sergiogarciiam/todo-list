@@ -76,7 +76,7 @@ const sidebarComponent = (() => {
 
     for (var key in projectsDictionary) {
       if (projectsDictionary.hasOwnProperty(key)) {
-        if (projectsDictionary[key].quick)
+        if (projectsDictionary[key].isQuick)
           quickProjects.appendChild(
             createProject(key, projectsDictionary[key])
           );

@@ -3,12 +3,12 @@ import { deleteMenu } from "../deleteMenu";
 import { projectsController } from "../../utils/projectsController";
 
 const projectsMenu = (() => {
-  let actualId = null;
-  let actualProject = null;
+  let currentId = null;
+  let currentProject = null;
 
   const setUp = (id, project) => {
-    actualId = id;
-    actualProject = project;
+    currentId = id;
+    currentProject = project;
 
     const projectMenuContainer = document.createElement("div");
     projectMenuContainer.classList.add("element-menu-container");
@@ -34,7 +34,7 @@ const projectsMenu = (() => {
 
     deleteIcon.className = "fa-solid fa-trash";
 
-    inputProjectName.value = actualProject.name;
+    inputProjectName.value = currentProject.name;
 
     deleteIcon.addEventListener("click", openDeleteMenu);
     deleteButton.addEventListener("click", openDeleteMenu);
@@ -42,7 +42,7 @@ const projectsMenu = (() => {
     deleteButton.appendChild(deleteIcon);
 
     nameContainer.appendChild(inputProjectName);
-    if (actualId !== null) nameContainer.appendChild(deleteButton);
+    if (currentId !== null) nameContainer.appendChild(deleteButton);
 
     return nameContainer;
   }
@@ -50,7 +50,7 @@ const projectsMenu = (() => {
   function createDescriptionContainer() {
     const descriptionArea = document.createElement("textarea");
     descriptionArea.classList.add("description-area");
-    descriptionArea.value = actualProject.description;
+    descriptionArea.value = currentProject.description;
 
     return descriptionArea;
   }
@@ -68,7 +68,7 @@ const projectsMenu = (() => {
     cancelButton.type = "button";
     confirmButton.type = "button";
 
-    if (actualId === null) {
+    if (currentId === null) {
       cancelButton.addEventListener("click", hideProjectMenuFromNew);
       confirmButton.addEventListener("click", addProject);
     } else {
@@ -85,31 +85,31 @@ const projectsMenu = (() => {
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
     const menuContainer = document.querySelector(".element-menu-container");
-    menuContainer.appendChild(deleteMenu.setUp(actualId, actualProject));
+    menuContainer.appendChild(deleteMenu.setUp(currentId, currentProject));
   }
 
   // UTIL BUTTONS CONTAINER
   function addProject() {
-    actualProject = updateActualProject();
+    currentProject = updateActualProject();
 
     const projectMenu = document.querySelector(".element-menu-container");
     const projectsContainer = projectMenu.parentNode.querySelector(
       ".elements-container"
     );
-    const projectId = projectsController.createProject(actualProject);
+    const projectId = projectsController.createProject(currentProject);
 
     projectsContainer.appendChild(
-      projectComponent.setUp(projectId, actualProject)
+      projectComponent.setUp(projectId, currentProject)
     );
 
     hideProjectMenuFromNew();
   }
 
   function updateProject() {
-    actualProject = updateActualProject();
+    currentProject = updateActualProject();
 
-    projectsController.updateProject(actualId.substring(1), actualProject);
-    projectComponent.updateProject(actualId.substring(1), actualProject);
+    projectsController.updateProject(currentId.substring(1), currentProject);
+    projectComponent.updateProject(currentId.substring(1), currentProject);
 
     hideProjectMenuFromUpdate();
   }
@@ -131,7 +131,7 @@ const projectsMenu = (() => {
     const projectMenuContainer = document.querySelector(
       ".element-menu-container"
     );
-    const project = document.querySelector(`#${actualId}`);
+    const project = document.querySelector(`#${currentId}`);
     const blocker = document.querySelector(".blocker");
 
     projectMenuContainer.remove();
@@ -141,7 +141,7 @@ const projectsMenu = (() => {
 
   // MORE UTILITY
   function updateActualProject() {
-    const newActualProject = actualProject;
+    const newActualProject = currentProject;
 
     const inputProjectName = document.querySelector(".input-element-name");
     const description = document.querySelector(".description-area");

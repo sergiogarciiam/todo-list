@@ -27,7 +27,7 @@ const projectComponent = (() => {
     projectEditButton.classList.add("element-edit-button");
     projectDeleteButton.classList.add("element-delete-button");
 
-    if (project.quick) {
+    if (project.isQuick) {
       starIcon.className = "fa-solid fa-star active";
       projectQuickButton.classList.add("quick-active");
     } else {

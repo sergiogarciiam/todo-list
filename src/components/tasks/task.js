@@ -45,7 +45,7 @@ const taskComponent = (() => {
 
     taskCheckbox.style.backgroundColor = getPriorityColor(task.priority);
 
-    if (task.complete) {
+    if (task.isComplete) {
       checkIcon.classList.add("complete");
       taskTitle.classList.add("complete");
     }
@@ -137,7 +137,7 @@ const taskComponent = (() => {
 
   function completeTask(taskContainer) {
     const id = taskContainer.id.substring(1);
-    const title = taskContainer.querySelector(".task-title");
+    const title = taskContainer.querySelector(".element-title");
     const check = taskContainer
       .querySelector(".task-checkbox-button")
       .querySelector("svg");

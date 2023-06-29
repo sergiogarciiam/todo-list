@@ -40,7 +40,9 @@ const projectsController = (() => {
   };
 
   const toggleQuick = (id) => {
-    projectsDictionary[id].quick = projectsDictionary[id].quick ? false : true;
+    projectsDictionary[id].isQuick = projectsDictionary[id].isQuick
+      ? false
+      : true;
     saveProjectsToLocalStorage();
   };
 

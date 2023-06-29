@@ -37,7 +37,9 @@ const tasksController = (() => {
   };
 
   const toggleCompleteTask = (id) => {
-    tasksDictionary[id].complete = tasksDictionary[id].complete ? false : true;
+    tasksDictionary[id].isComplete = tasksDictionary[id].isComplete
+      ? false
+      : true;
     saveTasksToLocalStorage();
   };
 
