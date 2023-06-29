@@ -1,16 +1,16 @@
-import { dateController } from "../../utils/dateController";
-import { tasksController } from "../../utils/tasksController";
-import { addNewTaskButton } from "../tasks/addNewTaskButton";
-import { taskComponent } from "../tasks/task";
-import { blockerComponent } from "./blocker";
+import { dateController } from "../../controllers/dateController";
+import { tasksController } from "../../controllers/tasksController";
+import { addNewTaskButton } from "../buttons/addNewTaskButton";
+import { taskElement } from "../elements/taskElement";
+import { blockerElement } from "../elements/blockerElement";
 
-const weekComponent = (() => {
+const weekContainer = (() => {
   const setUp = () => {
-    const weekContainer = document.createElement("main");
+    const mainContainer = document.createElement("main");
     const weekTitle = document.createElement("h1");
     const daysContainer = document.createElement("div");
 
-    weekContainer.classList.add("week-container");
+    mainContainer.classList.add("week-container");
     weekTitle.classList.add("week-title");
     daysContainer.classList.add("days-container");
 
@@ -24,10 +24,10 @@ const weekComponent = (() => {
     daysContainer.appendChild(createDay("Saturday"));
     daysContainer.appendChild(createDay("Sunday"));
 
-    weekContainer.appendChild(weekTitle);
-    weekContainer.appendChild(daysContainer);
+    mainContainer.appendChild(weekTitle);
+    mainContainer.appendChild(daysContainer);
 
-    return weekContainer;
+    return mainContainer;
   };
 
   function createDay(day) {
@@ -40,7 +40,7 @@ const weekComponent = (() => {
 
     dayTitle.textContent = day;
 
-    dayContainer.appendChild(blockerComponent.setUp());
+    dayContainer.appendChild(blockerElement.setUp());
     dayContainer.appendChild(dayTitle);
     dayContainer.appendChild(createTasksContainer(numberDay));
     dayContainer.appendChild(addNewTaskButton.setUp());
@@ -61,7 +61,7 @@ const weekComponent = (() => {
           dateController.getNextDayOfWeek(numberDay)
         ) {
           tasksContainer.appendChild(
-            taskComponent.setUp(key, tasksDictionary[key])
+            taskElement.setUp(key, tasksDictionary[key])
           );
         }
       }
@@ -85,4 +85,4 @@ const weekComponent = (() => {
   return { setUp };
 })();
 
-export { weekComponent };
+export { weekContainer };

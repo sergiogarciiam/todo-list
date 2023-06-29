@@ -1,9 +1,9 @@
-import { projectsController } from "../../utils/projectsController";
-import { deleteMenu } from "../deleteMenu";
-import { projectsMenu } from "./projectMenu";
-import { mainDisplayController } from "../mainDisplayController";
+import { projectsController } from "../../controllers/projectsController";
+import { mainDisplayController } from "../../controllers/mainDisplayController";
+import { deleteMenu } from "../menus/deleteMenu";
+import { projectsMenu } from "../menus/projectMenu";
 
-const projectComponent = (() => {
+const projectElement = (() => {
   // PUBLIC FUNCTIONS
   const setUp = (id, project) => {
     const projectContainer = document.createElement("div");
@@ -167,4 +167,4 @@ const projectComponent = (() => {
   return { setUp, updateProject };
 })();
 
-export { projectComponent };
+export { projectElement };

@@ -1,15 +1,15 @@
-import { mainDisplayController } from "./components/mainDisplayController";
-import { projectsController } from "./utils/projectsController";
-import { tasksController } from "./utils/tasksController";
+import { mainDisplayController } from "./controllers/mainDisplayController";
+import { projectsController } from "./controllers/projectsController";
+import { tasksController } from "./controllers/tasksController";
 
-import "./assets/styles/main/main.css";
-import "./assets/styles/main/week.css";
-import "./assets/styles/main/specificProject.css";
-import "./assets/styles/menu/header.css";
-import "./assets/styles/menu/sidebar.css";
-import "./assets/styles/element/element.css";
-import "./assets/styles/element/elementMenu.css";
-import "./assets/styles/element/deleteMenu.css";
+import "./assets/styles/main.css";
+import "./assets/styles/week.css";
+import "./assets/styles/specificProject.css";
+import "./assets/styles/header.css";
+import "./assets/styles/sidebar.css";
+import "./assets/styles/element.css";
+import "./assets/styles/elementMenu.css";
+import "./assets/styles/deleteMenu.css";
 import "./assets/styles/global.css";
 
 import "@fortawesome/fontawesome-free/js/fontawesome";

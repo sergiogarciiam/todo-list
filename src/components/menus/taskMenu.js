@@ -1,11 +1,11 @@
-import { tasksController } from "../../utils/tasksController";
-import { taskComponent } from "./task";
-import { dateController } from "../../utils/dateController";
+import { tasksController } from "../../controllers/tasksController";
+import { projectsController } from "../../controllers/projectsController";
+import { dateController } from "../../controllers/dateController";
 import { getPriorityColor } from "../../utils/priority";
-import { deleteMenu } from "../deleteMenu";
-import { projectsController } from "../../utils/projectsController";
+import { taskElement } from "../elements/taskElement";
+import { deleteMenu } from "./deleteMenu";
 
-const taskMenuComponent = (() => {
+const taskMenu = (() => {
   let currentId = null;
   let currentTask = null;
 
@@ -165,7 +165,7 @@ const taskMenuComponent = (() => {
     const taskId = tasksController.createTask(currentTask);
 
     if (isCorrectContainer(tasksContainer.parentNode))
-      tasksContainer.appendChild(taskComponent.setUp(taskId, currentTask));
+      tasksContainer.appendChild(taskElement.setUp(taskId, currentTask));
 
     hideTaskMenuFromNew();
   }
@@ -174,7 +174,7 @@ const taskMenuComponent = (() => {
     currentTask = updateActualTask();
 
     tasksController.updateTask(currentId.substring(1), currentTask);
-    taskComponent.updateTask(currentId.substring(1), currentTask);
+    taskElement.updateTask(currentId.substring(1), currentTask);
 
     hideTaskMenuFromUpdate();
   }
@@ -253,4 +253,4 @@ const taskMenuComponent = (() => {
   return { setUp };
 })();
 
-export { taskMenuComponent };
+export { taskMenu };

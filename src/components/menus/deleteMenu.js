@@ -1,5 +1,5 @@
-import { projectsController } from "../utils/projectsController";
-import { tasksController } from "../utils/tasksController";
+import { projectsController } from "../../controllers/projectsController";
+import { tasksController } from "../../controllers/tasksController";
 
 const deleteMenu = (() => {
   let currentId = null;

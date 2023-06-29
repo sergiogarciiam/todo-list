@@ -1,5 +1,5 @@
-import { Task } from "../../utils/task";
-import { taskMenuComponent } from "./taskMenu";
+import { Task } from "../../classes/task";
+import { taskMenu } from "../menus/taskMenu";
 
 const addNewTaskButton = (() => {
   const setUp = () => {
@@ -19,7 +19,7 @@ const addNewTaskButton = (() => {
     const task = new Task(mainContainer);
     const blocker = document.querySelector(".blocker");
 
-    mainContainer.appendChild(taskMenuComponent.setUp(null, task));
+    mainContainer.appendChild(taskMenu.setUp(null, task));
     blocker.classList.remove("hide");
   }
 

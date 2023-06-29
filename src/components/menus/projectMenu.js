@@ -1,6 +1,6 @@
-import { projectComponent } from "./project";
-import { deleteMenu } from "../deleteMenu";
-import { projectsController } from "../../utils/projectsController";
+import { projectsController } from "../../controllers/projectsController";
+import { projectElement } from "../elements/projectElement";
+import { deleteMenu } from "./deleteMenu";
 
 const projectsMenu = (() => {
   let currentId = null;
@@ -99,7 +99,7 @@ const projectsMenu = (() => {
     const projectId = projectsController.createProject(currentProject);
 
     projectsContainer.appendChild(
-      projectComponent.setUp(projectId, currentProject)
+      projectElement.setUp(projectId, currentProject)
     );
 
     hideProjectMenuFromNew();
@@ -109,7 +109,7 @@ const projectsMenu = (() => {
     currentProject = updateActualProject();
 
     projectsController.updateProject(currentId.substring(1), currentProject);
-    projectComponent.updateProject(currentId.substring(1), currentProject);
+    projectElement.updateProject(currentId.substring(1), currentProject);
 
     hideProjectMenuFromUpdate();
   }

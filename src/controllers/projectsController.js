@@ -1,5 +1,5 @@
 import { tasksController } from "./tasksController";
-import { Project } from "./project";
+import { Project } from "../classes/project";
 
 const projectsController = (() => {
   let totalProjects = 0;

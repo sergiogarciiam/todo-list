@@ -1,17 +1,17 @@
-import { projectsController } from "../../utils/projectsController";
-import { mainDisplayController } from "../mainDisplayController";
+import { projectsController } from "../../controllers/projectsController";
+import { mainDisplayController } from "../../controllers/mainDisplayController";
 
-const sidebarComponent = (() => {
+const sidebarContainer = (() => {
   const setUp = () => {
-    const sidebarContainer = document.createElement("nav");
+    const mainContainer = document.createElement("nav");
 
-    sidebarContainer.classList.add("sidebar-container");
+    mainContainer.classList.add("sidebar-container");
 
-    sidebarContainer.appendChild(createButtonsContainer());
-    sidebarContainer.appendChild(createQuickAccessContainer());
-    sidebarContainer.appendChild(createSourceLink());
+    mainContainer.appendChild(createButtonsContainer());
+    mainContainer.appendChild(createQuickAccessContainer());
+    mainContainer.appendChild(createSourceLink());
 
-    return sidebarContainer;
+    return mainContainer;
   };
 
   function createButtonsContainer() {
@@ -103,4 +103,4 @@ const sidebarComponent = (() => {
   return { setUp };
 })();
 
-export { sidebarComponent };
+export { sidebarContainer };

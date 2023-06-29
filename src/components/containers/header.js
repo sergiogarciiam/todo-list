@@ -1,10 +1,10 @@
-const headerComponent = (() => {
+const headerContainer = (() => {
   const setUp = () => {
-    const headerContainer = document.createElement("header");
+    const mainContainer = document.createElement("header");
     const sidebarButton = document.createElement("button");
     const icon = document.createElement("i");
 
-    headerContainer.classList.add("header-container");
+    mainContainer.classList.add("header-container");
     sidebarButton.classList.add("sidebar-button");
     icon.className = "fa-solid fa-bars";
 
@@ -12,9 +12,9 @@ const headerComponent = (() => {
     sidebarButton.addEventListener("click", hideSidebar);
     sidebarButton.appendChild(icon);
 
-    headerContainer.appendChild(sidebarButton);
+    mainContainer.appendChild(sidebarButton);
 
-    return headerContainer;
+    return mainContainer;
   };
 
   function hideSidebar() {
@@ -25,4 +25,4 @@ const headerComponent = (() => {
   return { setUp };
 })();
 
-export { headerComponent };
+export { headerContainer };

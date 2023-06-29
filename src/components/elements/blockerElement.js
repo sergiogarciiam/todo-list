@@ -1,4 +1,4 @@
-const blockerComponent = (() => {
+const blockerElement = (() => {
   const setUp = () => {
     const blocker = document.createElement("div");
     blocker.classList.add("blocker");
@@ -9,4 +9,4 @@ const blockerComponent = (() => {
   return { setUp };
 })();
 
-export { blockerComponent };
+export { blockerElement };

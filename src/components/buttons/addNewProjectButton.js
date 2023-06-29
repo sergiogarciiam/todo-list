@@ -1,5 +1,5 @@
-import { Project } from "../../utils/project";
-import { projectsMenu } from "./projectMenu";
+import { Project } from "../../classes/project";
+import { projectsMenu } from "../menus/projectMenu";
 
 const addNewProjectButton = (() => {
   const setUp = () => {

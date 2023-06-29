@@ -1,34 +1,34 @@
-import { tasksController } from "../../utils/tasksController";
-import { mainDisplayController } from "../mainDisplayController";
-import { addNewTaskButton } from "../tasks/addNewTaskButton";
-import { taskComponent } from "../tasks/task";
-import { blockerComponent } from "./blocker";
+import { tasksController } from "../../controllers/tasksController";
+import { mainDisplayController } from "../../controllers/mainDisplayController";
+import { addNewTaskButton } from "../buttons/addNewTaskButton";
+import { taskElement } from "../elements/taskElement";
+import { blockerElement } from "../elements/blockerElement";
 
-const specificProjectComponent = (() => {
+const specificProjectContainer = (() => {
   const setUp = (id, project) => {
-    const specificProjectContainer = document.createElement("main");
+    const mainContainer = document.createElement("main");
     const backButton = document.createElement("button");
     const specificProjectTitle = document.createElement("h1");
     const backIcon = document.createElement("i");
 
-    specificProjectContainer.classList.add("specific-project-container");
+    mainContainer.classList.add("specific-project-container");
     backButton.classList.add("projects-back-button");
     specificProjectTitle.classList.add("specific-project-title");
     backIcon.className = "fa-solid fa-chevron-left";
 
-    specificProjectContainer.id = `p${id}`;
+    mainContainer.id = `p${id}`;
     specificProjectTitle.textContent = project.name;
 
     backButton.addEventListener("click", mainDisplayController.setProjects);
     backButton.appendChild(backIcon);
 
-    specificProjectContainer.appendChild(blockerComponent.setUp());
-    specificProjectContainer.appendChild(backButton);
-    specificProjectContainer.appendChild(specificProjectTitle);
-    specificProjectContainer.appendChild(createTasksContainer(id));
-    specificProjectContainer.appendChild(addNewTaskButton.setUp());
+    mainContainer.appendChild(blockerElement.setUp());
+    mainContainer.appendChild(backButton);
+    mainContainer.appendChild(specificProjectTitle);
+    mainContainer.appendChild(createTasksContainer(id));
+    mainContainer.appendChild(addNewTaskButton.setUp());
 
-    return specificProjectContainer;
+    return mainContainer;
   };
 
   function createTasksContainer(id) {
@@ -41,7 +41,7 @@ const specificProjectComponent = (() => {
       if (tasksDictionary.hasOwnProperty(key)) {
         if (tasksDictionary[key].project === id) {
           tasksContainer.appendChild(
-            taskComponent.setUp(key, tasksDictionary[key])
+            taskElement.setUp(key, tasksDictionary[key])
           );
         }
       }
@@ -53,4 +53,4 @@ const specificProjectComponent = (() => {
   return { setUp };
 })();
 
-export { specificProjectComponent };
+export { specificProjectContainer };

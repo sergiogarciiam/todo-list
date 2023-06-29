@@ -1,10 +1,10 @@
+import { projectsController } from "../../controllers/projectsController";
+import { tasksController } from "../../controllers/tasksController";
 import { getPriorityColor } from "../../utils/priority";
-import { projectsController } from "../../utils/projectsController";
-import { tasksController } from "../../utils/tasksController";
-import { deleteMenu } from "../deleteMenu";
-import { taskMenuComponent } from "./taskMenu";
+import { deleteMenu } from "../menus/deleteMenu";
+import { taskMenu } from "../menus/taskMenu";
 
-const taskComponent = (() => {
+const taskElement = (() => {
   // PUBLIC FUNCTIONS
   const setUp = (id, task) => {
     const taskContainer = document.createElement("div");
@@ -126,11 +126,11 @@ const taskComponent = (() => {
     const taskContainer = target;
     const id = taskContainer.id;
     const task = tasksController.getTask(id.substring(1));
-    const taskMenu = taskMenuComponent.setUp(id, task);
+    const menu = taskMenu.setUp(id, task);
     const tasksContainer = taskContainer.parentNode;
     const blocker = document.querySelector(".blocker");
 
-    tasksContainer.insertBefore(taskMenu, taskContainer.nextSibling);
+    tasksContainer.insertBefore(menu, taskContainer.nextSibling);
     taskContainer.classList.add("hide");
     blocker.classList.remove("hide");
   }
@@ -157,4 +157,4 @@ const taskComponent = (() => {
   return { setUp, updateTask };
 })();
 
-export { taskComponent };
+export { taskElement };
