@@ -53,3 +53,35 @@ body {
 .menu-buttons-container > button:hover {
   opacity: 0.6;
 }
+
+/* RESPONSIVE */
+@media screen and (max-width: 1200px) {
+  .page-container {
+    grid-template-rows: 15fr 1fr;
+    grid-template-columns: 1fr;
+
+    grid-template-areas: "main" "sidebar";
+  }
+
+  .header-container {
+    display: none;
+  }
+
+  .sidebar-buttons-container,
+  .sidebar-container {
+    flex-direction: row;
+  }
+
+  .quick-access-container {
+    display: none;
+  }
+
+  main {
+    margin-left: 50px;
+  }
+
+  .days-container {
+    grid-template-rows: repeat(7, 300px);
+    grid-template-columns: 0;
+  }
+}

@@ -24,6 +24,13 @@ const addNewTaskButton = (() => {
   }
 
   function createTask(mainContainer) {
+    const isTodayContainer =
+      mainContainer.classList.contains("today-container");
+    const isDayContainer = mainContainer.classList.contains("day-container");
+    const isSpecificProjectContainer = mainContainer.classList.contains(
+      "specific-project-container"
+    );
+
     const task = {
       name: "",
       project: "Inbox",
@@ -33,12 +40,12 @@ const addNewTaskButton = (() => {
       complete: false,
     };
 
-    if (mainContainer.classList.contains("today-container")) {
+    if (isTodayContainer) {
       task.date = dateController.getTodayDate();
-    } else if (mainContainer.classList.contains("day-container")) {
+    } else if (isDayContainer) {
       const dayOfWeek = getDayOfWeek(mainContainer);
       task.date = dateController.getNextDayOfWeek(dayOfWeek);
-    } else if (mainContainer.classList.contains("specific-project-container")) {
+    } else if (isSpecificProjectContainer) {
       task.project = mainContainer.id.substring(2);
     }
 
