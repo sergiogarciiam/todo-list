@@ -15,7 +15,7 @@ const addNewProjectButton = (() => {
   function openProjectMenu(event) {
     event.target.classList.add("hide");
 
-    const mainContainer = event.target.parentNode;
+    const mainContainer = event.target;
     const project = new Project();
     const blocker = document.querySelector(".blocker");
 
