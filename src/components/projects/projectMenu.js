@@ -11,7 +11,7 @@ const projectsMenu = (() => {
     actualProject = project;
 
     const projectMenuContainer = document.createElement("div");
-    projectMenuContainer.classList.add("task-menu-container");
+    projectMenuContainer.classList.add("element-menu-container");
 
     projectMenuContainer.appendChild(createNameContainer());
     projectMenuContainer.appendChild(createDescriptionContainer());
@@ -28,9 +28,9 @@ const projectsMenu = (() => {
 
     const deleteIcon = document.createElement("i");
 
-    nameContainer.classList.add("new-task-name-container");
-    inputProjectName.classList.add("input-task-name");
-    deleteButton.classList.add("task-delete-button");
+    nameContainer.classList.add("menu-name-container");
+    inputProjectName.classList.add("input-element-name");
+    deleteButton.classList.add("element-delete-button");
 
     deleteIcon.className = "fa-solid fa-trash";
 
@@ -60,9 +60,7 @@ const projectsMenu = (() => {
     const cancelButton = document.createElement("button");
     const confirmButton = document.createElement("button");
 
-    buttonsContainer.classList.add("new-task-buttons-container");
-    cancelButton.classList.add("cancel-add-task-button");
-    confirmButton.classList.add("confirm-add-task-button");
+    buttonsContainer.classList.add("menu-buttons-container");
 
     cancelButton.textContent = "Cancel";
     confirmButton.textContent = "Confirm";
@@ -86,7 +84,7 @@ const projectsMenu = (() => {
 
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
-    const menuContainer = document.querySelector(".task-menu-container");
+    const menuContainer = document.querySelector(".element-menu-container");
     menuContainer.appendChild(deleteMenu.setUp(actualId, actualProject));
   }
 
@@ -94,9 +92,10 @@ const projectsMenu = (() => {
   function addProject() {
     actualProject = updateActualProject();
 
-    const projectMenu = document.querySelector(".task-menu-container");
-    const projectsContainer =
-      projectMenu.parentNode.querySelector(".tasks-container");
+    const projectMenu = document.querySelector(".element-menu-container");
+    const projectsContainer = projectMenu.parentNode.querySelector(
+      ".elements-container"
+    );
     const projectId = projectsController.createProject(actualProject);
 
     projectsContainer.appendChild(
@@ -109,14 +108,16 @@ const projectsMenu = (() => {
   function updateProject() {
     actualProject = updateActualProject();
 
-    projectsController.updateProject(actualId.substring(2), actualProject);
-    projectComponent.updateProject(actualId.substring(2), actualProject);
+    projectsController.updateProject(actualId.substring(1), actualProject);
+    projectComponent.updateProject(actualId.substring(1), actualProject);
 
     hideProjectMenuFromUpdate();
   }
 
   function hideProjectMenuFromNew() {
-    const projectMenuContainer = document.querySelector(".task-menu-container");
+    const projectMenuContainer = document.querySelector(
+      ".element-menu-container"
+    );
     const addButton =
       projectMenuContainer.parentNode.querySelector(".add-button");
     const blocker = document.querySelector(".blocker");
@@ -127,7 +128,9 @@ const projectsMenu = (() => {
   }
 
   function hideProjectMenuFromUpdate() {
-    const projectMenuContainer = document.querySelector(".task-menu-container");
+    const projectMenuContainer = document.querySelector(
+      ".element-menu-container"
+    );
     const project = document.querySelector(`#${actualId}`);
     const blocker = document.querySelector(".blocker");
 
@@ -140,7 +143,7 @@ const projectsMenu = (() => {
   function updateActualProject() {
     const newActualProject = actualProject;
 
-    const inputProjectName = document.querySelector(".input-task-name");
+    const inputProjectName = document.querySelector(".input-element-name");
     const description = document.querySelector(".description-area");
 
     newActualProject.name = inputProjectName.value;

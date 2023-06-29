@@ -14,7 +14,7 @@ const taskMenuComponent = (() => {
     actualTask = task;
 
     const taskMenuContainer = document.createElement("div");
-    taskMenuContainer.classList.add("task-menu-container");
+    taskMenuContainer.classList.add("element-menu-container");
 
     taskMenuContainer.appendChild(createNameContainer());
     taskMenuContainer.appendChild(createFeaturesContainer());
@@ -35,9 +35,9 @@ const taskMenuComponent = (() => {
     const deleteIcon = document.createElement("i");
 
     checkbox.classList.add("task-checkbox-button");
-    nameContainer.classList.add("new-task-name-container");
-    inputTaskName.classList.add("input-task-name");
-    deleteButton.classList.add("task-delete-button");
+    nameContainer.classList.add("menu-name-container");
+    inputTaskName.classList.add("input-element-name");
+    deleteButton.classList.add("element-delete-button");
 
     checkIcon.className = "fa-solid fa-check";
     deleteIcon.className = "fa-solid fa-trash";
@@ -60,7 +60,7 @@ const taskMenuComponent = (() => {
 
   function createFeaturesContainer() {
     const featuresContainer = document.createElement("div");
-    featuresContainer.classList.add("new-task-features-container");
+    featuresContainer.classList.add("menu-features-container");
 
     featuresContainer.appendChild(createProjectSelection());
     featuresContainer.appendChild(createPrioritySelection());
@@ -82,9 +82,7 @@ const taskMenuComponent = (() => {
     const cancelAddTaskButton = document.createElement("button");
     const confirmAddTaskButton = document.createElement("button");
 
-    buttonsContainer.classList.add("new-task-buttons-container");
-    cancelAddTaskButton.classList.add("cancel-add-task-button");
-    confirmAddTaskButton.classList.add("confirm-add-task-button");
+    buttonsContainer.classList.add("menu-buttons-container");
 
     cancelAddTaskButton.textContent = "Cancel";
     confirmAddTaskButton.textContent = "Confirm";
@@ -108,7 +106,7 @@ const taskMenuComponent = (() => {
 
   // UTIL NAME CONTAINER
   function openDeleteMenu() {
-    const menuContainer = document.querySelector(".task-menu-container");
+    const menuContainer = document.querySelector(".element-menu-container");
     menuContainer.appendChild(deleteMenu.setUp(actualId, actualTask));
   }
 
@@ -160,15 +158,13 @@ const taskMenuComponent = (() => {
   function addTask() {
     actualTask = updateActualTask();
 
-    const taskMenu = document.querySelector(".task-menu-container");
-    const tasksContainer =
-      taskMenu.parentNode.querySelector(".tasks-container");
+    const taskMenu = document.querySelector(".element-menu-container");
+    const tasksContainer = taskMenu.parentNode.querySelector(
+      ".elements-container"
+    );
     const taskId = tasksController.createTask(actualTask);
 
-    if (
-      isCorrectDate(tasksContainer.parentNode) &&
-      isCorrectContainer(tasksContainer.parentNode)
-    )
+    if (isCorrectContainer(tasksContainer.parentNode))
       tasksContainer.appendChild(taskComponent.setUp(taskId, actualTask));
 
     hideTaskMenuFromNew();
@@ -177,14 +173,14 @@ const taskMenuComponent = (() => {
   function updateTask() {
     actualTask = updateActualTask();
 
-    tasksController.updateTask(actualId.substring(2), actualTask);
-    taskComponent.updateTask(actualId.substring(2), actualTask);
+    tasksController.updateTask(actualId.substring(1), actualTask);
+    taskComponent.updateTask(actualId.substring(1), actualTask);
 
     hideTaskMenuFromUpdate();
   }
 
   function hideTaskMenuFromNew() {
-    const taskMenuContainer = document.querySelector(".task-menu-container");
+    const taskMenuContainer = document.querySelector(".element-menu-container");
     const addTaskButton =
       taskMenuContainer.parentNode.querySelector(".add-button");
     const blocker = document.querySelector(".blocker");
@@ -195,7 +191,7 @@ const taskMenuComponent = (() => {
   }
 
   function hideTaskMenuFromUpdate() {
-    const taskMenuContainer = document.querySelector(".task-menu-container");
+    const taskMenuContainer = document.querySelector(".element-menu-container");
     const task = document.querySelector(`#${actualId}`);
     const blocker = document.querySelector(".blocker");
 
@@ -208,7 +204,7 @@ const taskMenuComponent = (() => {
   function updateActualTask() {
     const newActualTask = actualTask;
 
-    const inputTaskName = document.querySelector(".input-task-name");
+    const inputTaskName = document.querySelector(".input-element-name");
     const projectsSelection = document.querySelector(".project-select");
     const prioritySelection = document.querySelector(".priority-select");
     const dueDate = document.querySelector(".due-date-input");
@@ -223,29 +219,29 @@ const taskMenuComponent = (() => {
     return newActualTask;
   }
 
-  function isCorrectDate(mainContainer) {
+  function isCorrectContainer(mainContainer) {
     let bool = true;
     let correctDate = null;
 
-    if (mainContainer.classList.contains("today-container")) {
+    if (
+      mainContainer.classList.contains("inbox-container") &&
+      actualTask.project !== "Inbox"
+    ) {
+      bool = false;
+    } else if (mainContainer.classList.contains("today-container")) {
       correctDate = dateController.getTodayDate();
+      if (correctDate !== null && actualTask.date !== correctDate) bool = false;
     } else if (mainContainer.classList.contains("day-container")) {
       const dayOfWeek = getDateOfWeek(mainContainer);
       correctDate = dateController.getNextDayOfWeek(dayOfWeek);
+      if (correctDate !== null && actualTask.date !== correctDate) bool = false;
+    } else if (
+      mainContainer.classList.contains("specific-project-container") &&
+      actualTask.project === "Inbox"
+    ) {
+      bool = false;
     }
-
-    if (correctDate !== null && actualTask.date !== correctDate) bool = false;
-
     return bool;
-  }
-
-  function isCorrectContainer(mainContainer) {
-    return (
-      (mainContainer.classList.contains("inbox-container") &&
-        actualTask.project === "Inbox") ||
-      (mainContainer.classList.contains("specific-project-container") &&
-        actualTask.project !== "Inbox")
-    );
   }
 
   function getDateOfWeek(mainContainer) {

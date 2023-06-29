@@ -18,14 +18,14 @@ const projectComponent = (() => {
     const deleteIcon = document.createElement("i");
 
     projectContainer.addEventListener("click", doAction);
-    projectContainer.id = `pr${id}`;
+    projectContainer.id = `p${id}`;
 
-    projectContainer.classList.add("task-container");
+    projectContainer.classList.add("element-container");
     projectPoint.classList.add("project-point");
-    projectTitle.classList.add("task-title");
+    projectTitle.classList.add("element-title");
     projectQuickButton.classList.add("project-quick-button");
-    projectEditButton.classList.add("task-edit-button");
-    projectDeleteButton.classList.add("task-delete-button");
+    projectEditButton.classList.add("element-edit-button");
+    projectDeleteButton.classList.add("element-delete-button");
 
     if (project.quick) {
       starIcon.className = "fa-solid fa-star active";
@@ -53,8 +53,8 @@ const projectComponent = (() => {
   };
 
   const updateProject = (id, project) => {
-    const projectContainer = document.querySelector(`#pr${id}`);
-    const projectTitle = projectContainer.querySelector(".task-title");
+    const projectContainer = document.querySelector(`#p${id}`);
+    const projectTitle = projectContainer.querySelector(".element-title");
 
     projectTitle.textContent = project.name;
   };
@@ -66,23 +66,23 @@ const projectComponent = (() => {
     const parentTargetClass = target.parentNode.classList;
 
     if (
-      targetClass.contains("task-title") ||
-      targetClass.contains("task-container") ||
+      targetClass.contains("element-title") ||
+      targetClass.contains("element-container") ||
       targetClass.contains("project-point")
     ) {
-      openSpecificProject(target.closest(".task-container"));
+      openSpecificProject(target.closest(".element-container"));
     } else if (
-      targetClass.contains("task-edit-button") ||
+      targetClass.contains("element-edit-button") ||
       targetClass.contains("fa-pen") ||
       parentTargetClass.contains("fa-pen")
     ) {
-      openProjectMenu(target.closest(".task-container"));
+      openProjectMenu(target.closest(".element-container"));
     } else if (
-      targetClass.contains("task-delete-button") ||
+      targetClass.contains("element-delete-button") ||
       targetClass.contains("fa-trash") ||
       parentTargetClass.contains("fa-trash")
     ) {
-      openDeleteMenu(target.closest(".task-container"));
+      openDeleteMenu(target.closest(".element-container"));
       const blocker = document.querySelector(".blocker");
       blocker.classList.remove("hide");
     } else if (
@@ -90,12 +90,12 @@ const projectComponent = (() => {
       targetClass.contains("fa-star") ||
       parentTargetClass.contains("fa-star")
     ) {
-      addQuickProject(target.closest(".task-container"));
+      addQuickProject(target.closest(".element-container"));
     }
   }
 
   function openSpecificProject(targetProject) {
-    const id = targetProject.id.substring(2);
+    const id = targetProject.id.substring(1);
     const project = projectsController.getProject(id);
 
     mainDisplayController.setSpecificProject(id, project);
@@ -106,7 +106,7 @@ const projectComponent = (() => {
     const id = projectContainer.id;
     const projectsContainer = projectContainer.parentNode;
     const blocker = document.querySelector(".blocker");
-    const project = projectsController.getProject(id.substring(2));
+    const project = projectsController.getProject(id.substring(1));
     const menu = projectsMenu.setUp(id, project);
 
     projectsContainer.insertBefore(menu, projectContainer.nextSibling);
@@ -118,13 +118,13 @@ const projectComponent = (() => {
     const id = projectContainer.id;
     let element = null;
 
-    element = projectsController.getProject(id.substring(2));
+    element = projectsController.getProject(id.substring(1));
     projectContainer.appendChild(deleteMenu.setUp(id, element));
   }
 
   function addQuickProject(projectContainer) {
     const quickProjectsContainer = document.querySelector(".quick-projects");
-    const id = projectContainer.id.substring(2);
+    const id = projectContainer.id.substring(1);
     const project = projectsController.getProject(id);
 
     const button = projectContainer.querySelector(".project-quick-button");

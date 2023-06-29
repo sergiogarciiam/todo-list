@@ -2,6 +2,7 @@ import { dateController } from "../../utils/dateController";
 import { tasksController } from "../../utils/tasksController";
 import { addNewTaskButton } from "../tasks/addNewTaskButton";
 import { taskComponent } from "../tasks/task";
+import { blockerComponent } from "./blocker";
 
 const todayComponent = (() => {
   const setUp = () => {
@@ -13,7 +14,7 @@ const todayComponent = (() => {
 
     todayTitle.textContent = "Today";
 
-    todayContainer.appendChild(createBlocker());
+    todayContainer.appendChild(blockerComponent.setUp());
     todayContainer.appendChild(todayTitle);
     todayContainer.appendChild(createTasksContainer());
     todayContainer.appendChild(addNewTaskButton.setUp());
@@ -25,7 +26,7 @@ const todayComponent = (() => {
     const tasksContainer = document.createElement("div");
     const tasksDictionary = tasksController.getAllTasks();
 
-    tasksContainer.classList.add("tasks-container");
+    tasksContainer.classList.add("elements-container");
 
     for (let key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
@@ -38,14 +39,6 @@ const todayComponent = (() => {
     }
 
     return tasksContainer;
-  }
-
-  function createBlocker() {
-    const blocker = document.createElement("div");
-    blocker.classList.add("blocker");
-    blocker.classList.add("hide");
-
-    return blocker;
   }
 
   return { setUp };

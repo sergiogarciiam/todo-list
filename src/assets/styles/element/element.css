@@ -1,14 +1,14 @@
-.tasks-container {
+.elements-container {
   position: relative;
   width: 50%;
 }
 
-.day-container .tasks-container,
-.tasks-container .tasks-container {
+.day-container .elements-container,
+.elements-container .elements-container {
   width: 100%;
 }
 
-.task-container {
+.element-container {
   width: 100%;
   display: flex;
   gap: 20px;
@@ -51,7 +51,7 @@
 }
 
 /* TITLE */
-.task-title {
+.element-title {
   font-size: 1.3rem;
   transition: 300ms;
 }
@@ -73,8 +73,8 @@
 
 /* BUTTONS */
 .project-quick-button,
-.task-edit-button,
-.task-delete-button {
+.element-edit-button,
+.element-delete-button {
   height: 20px;
   width: 20px;
   align-self: center;
@@ -91,18 +91,18 @@
 }
 
 .project-quick-button:hover,
-.task-edit-button:hover,
-.task-delete-button:hover {
+.element-edit-button:hover,
+.element-delete-button:hover {
   background-color: var(--mark-color);
 }
 
-.task-edit-button {
+.element-edit-button {
   margin-left: auto;
 }
 
-.task-container:hover > .task-edit-button,
-.task-container:hover > .task-delete-button,
-.task-container:hover > .project-quick-button {
+.element-container:hover > .element-edit-button,
+.element-container:hover > .element-delete-button,
+.element-container:hover > .project-quick-button {
   opacity: 1;
 }
 

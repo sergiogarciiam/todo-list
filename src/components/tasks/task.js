@@ -20,15 +20,15 @@ const taskComponent = (() => {
     const deleteIcon = document.createElement("i");
 
     taskContainer.addEventListener("click", doAction);
-    taskContainer.id = `ta${id}`;
+    taskContainer.id = `t${id}`;
 
-    taskContainer.classList.add("task-container");
+    taskContainer.classList.add("element-container");
     taskCheckbox.classList.add("task-checkbox-button");
-    taskTitle.classList.add("task-title");
+    taskTitle.classList.add("element-title");
     taskProject.classList.add("task-project");
     taskDate.classList.add("task-date");
-    taskEditButton.classList.add("task-edit-button");
-    taskDeleteButton.classList.add("task-delete-button");
+    taskEditButton.classList.add("element-edit-button");
+    taskDeleteButton.classList.add("element-delete-button");
 
     checkIcon.className = "fa-solid fa-check";
     editIcon.className = "fa-solid fa-pen";
@@ -65,8 +65,8 @@ const taskComponent = (() => {
   };
 
   const updateTask = (id, task) => {
-    const taskContainer = document.querySelector(`#ta${id}`);
-    const taskTitle = taskContainer.querySelector(".task-title");
+    const taskContainer = document.querySelector(`#t${id}`);
+    const taskTitle = taskContainer.querySelector(".element-title");
     const taskCheckbox = taskContainer.querySelector(".task-checkbox-button");
     const taskProject = taskContainer.querySelector(".task-project");
     const taskEditButton = taskContainer.querySelector(".task-edit-button");
@@ -99,24 +99,24 @@ const taskComponent = (() => {
     const parentTargetClass = target.parentNode.classList;
 
     if (
-      targetClass.contains("task-container") ||
+      targetClass.contains("element-container") ||
       targetClass.contains("task-title") ||
       targetClass.contains("task-edit-button") ||
       targetClass.contains("fa-pen") ||
       parentTargetClass.contains("fa-pen")
     ) {
-      openTaskMenu(target.closest(".task-container"));
+      openTaskMenu(target.closest(".element-container"));
     } else if (
       targetClass.contains("task-checkbox-button") ||
       targetClass.contains("fa-check")
     ) {
-      completeTask(target.closest(".task-container"));
+      completeTask(target.closest(".element-container"));
     } else if (
-      targetClass.contains("task-delete-button") ||
+      targetClass.contains("element-delete-button") ||
       targetClass.contains("fa-trash") ||
       parentTargetClass.contains("fa-trash")
     ) {
-      openDeleteMenu(target.closest(".task-container"));
+      openDeleteMenu(target.closest(".element-container"));
       const blocker = document.querySelector(".blocker");
       blocker.classList.remove("hide");
     }
@@ -125,7 +125,7 @@ const taskComponent = (() => {
   function openTaskMenu(target) {
     const taskContainer = target;
     const id = taskContainer.id;
-    const task = tasksController.getTask(id.substring(2));
+    const task = tasksController.getTask(id.substring(1));
     const taskMenu = taskMenuComponent.setUp(id, task);
     const tasksContainer = taskContainer.parentNode;
     const blocker = document.querySelector(".blocker");
@@ -136,7 +136,7 @@ const taskComponent = (() => {
   }
 
   function completeTask(taskContainer) {
-    const id = taskContainer.id.substring(2);
+    const id = taskContainer.id.substring(1);
     const title = taskContainer.querySelector(".task-title");
     const check = taskContainer
       .querySelector(".task-checkbox-button")
@@ -149,7 +149,7 @@ const taskComponent = (() => {
 
   function openDeleteMenu(taskContainer) {
     const id = taskContainer.id;
-    const task = tasksController.getTask(id.substring(2));
+    const task = tasksController.getTask(id.substring(1));
 
     taskContainer.appendChild(deleteMenu.setUp(id, task));
   }

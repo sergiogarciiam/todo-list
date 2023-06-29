@@ -2,18 +2,19 @@ import { dateController } from "../../utils/dateController";
 import { tasksController } from "../../utils/tasksController";
 import { addNewTaskButton } from "../tasks/addNewTaskButton";
 import { taskComponent } from "../tasks/task";
+import { blockerComponent } from "./blocker";
 
 const weekComponent = (() => {
   const setUp = () => {
     const weekContainer = document.createElement("main");
-    const todayTitle = document.createElement("h1");
+    const weekTitle = document.createElement("h1");
     const daysContainer = document.createElement("div");
 
     weekContainer.classList.add("week-container");
-    todayTitle.classList.add("week-title");
+    weekTitle.classList.add("week-title");
     daysContainer.classList.add("days-container");
 
-    todayTitle.textContent = "Week";
+    weekTitle.textContent = "Week";
 
     daysContainer.appendChild(createDay("Monday"));
     daysContainer.appendChild(createDay("Tuesday"));
@@ -23,7 +24,7 @@ const weekComponent = (() => {
     daysContainer.appendChild(createDay("Saturday"));
     daysContainer.appendChild(createDay("Sunday"));
 
-    weekContainer.appendChild(todayTitle);
+    weekContainer.appendChild(weekTitle);
     weekContainer.appendChild(daysContainer);
 
     return weekContainer;
@@ -39,7 +40,7 @@ const weekComponent = (() => {
 
     dayTitle.textContent = day;
 
-    dayContainer.appendChild(createBlocker());
+    dayContainer.appendChild(blockerComponent.setUp());
     dayContainer.appendChild(dayTitle);
     dayContainer.appendChild(createTasksContainer(numberDay));
     dayContainer.appendChild(addNewTaskButton.setUp());
@@ -51,7 +52,7 @@ const weekComponent = (() => {
     const tasksContainer = document.createElement("div");
     const tasksDictionary = tasksController.getAllTasks();
 
-    tasksContainer.classList.add("tasks-container");
+    tasksContainer.classList.add("elements-container");
 
     for (let key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
@@ -67,14 +68,6 @@ const weekComponent = (() => {
     }
 
     return tasksContainer;
-  }
-
-  function createBlocker() {
-    const blocker = document.createElement("div");
-    blocker.classList.add("blocker");
-    blocker.classList.add("hide");
-
-    return blocker;
   }
 
   function getNumberDay(day) {

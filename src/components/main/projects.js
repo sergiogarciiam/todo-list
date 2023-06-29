@@ -1,6 +1,7 @@
 import { projectsController } from "../../utils/projectsController";
 import { addNewProjectButton } from "../projects/addNewProjectButton";
 import { projectComponent } from "../projects/project";
+import { blockerComponent } from "./blocker";
 
 const projectsComponent = (() => {
   const setUp = () => {
@@ -12,7 +13,7 @@ const projectsComponent = (() => {
 
     projectsTitle.textContent = "Projects";
 
-    projectsContainer.appendChild(createBlocker());
+    projectsContainer.appendChild(blockerComponent.setUp());
     projectsContainer.appendChild(projectsTitle);
     projectsContainer.appendChild(createProjectsSubContainer());
     projectsContainer.appendChild(addNewProjectButton.setUp());
@@ -24,7 +25,7 @@ const projectsComponent = (() => {
     const projectsSubContainer = document.createElement("div");
     const projectsDictionary = projectsController.getAllProjects();
 
-    projectsSubContainer.classList.add("tasks-container");
+    projectsSubContainer.classList.add("elements-container");
 
     for (let key in projectsDictionary) {
       if (projectsDictionary.hasOwnProperty(key)) {
@@ -35,14 +36,6 @@ const projectsComponent = (() => {
     }
 
     return projectsSubContainer;
-  }
-
-  function createBlocker() {
-    const blocker = document.createElement("div");
-    blocker.classList.add("blocker");
-    blocker.classList.add("hide");
-
-    return blocker;
   }
 
   return { setUp };

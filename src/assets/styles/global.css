@@ -17,7 +17,8 @@
 body {
   background-color: var(--background-color);
   color: var(--letter-color);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .page-container {
@@ -35,7 +36,7 @@ body {
 
 /* BUTTONS */
 .delete-menu-container button,
-.new-task-buttons-container > button {
+.menu-buttons-container > button {
   padding: 10px;
 
   border: none;
@@ -49,6 +50,6 @@ body {
 }
 
 .delete-menu-container button:hover,
-.new-task-buttons-container > button:hover {
+.menu-buttons-container > button:hover {
   opacity: 0.6;
 }

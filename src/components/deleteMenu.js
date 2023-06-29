@@ -36,9 +36,9 @@ const deleteMenu = (() => {
     const blocker = document.querySelector(".blocker");
 
     if (isTask()) {
-      tasksController.deleteTask(actualId.substring(2));
+      tasksController.deleteTask(actualId.substring(1));
     } else {
-      projectsController.deleteProject(actualId.substring(2));
+      projectsController.deleteProject(actualId.substring(1));
     }
     taskContainer.remove();
     blocker.classList.add("hide");
@@ -53,7 +53,7 @@ const deleteMenu = (() => {
   }
 
   function isTask() {
-    return actualId.slice(0, 2) === "ta";
+    return actualId.slice(0, 1) === "t";
   }
 
   return { setUp };

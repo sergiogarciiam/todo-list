@@ -1,4 +1,4 @@
-.task-menu-container {
+.element-menu-container {
   position: relative;
   width: 50%;
   display: flex;
@@ -13,18 +13,18 @@
   z-index: 2;
 }
 
-.day-container .task-menu-container,
-.tasks-container .task-menu-container {
+.day-container .element-menu-container,
+.elements-container .element-menu-container {
   width: 100%;
 }
 
 /* NAME CONTAINER */
-.new-task-name-container {
+.menu-name-container {
   display: flex;
   gap: 20px;
 }
 
-.new-task-name-container > input {
+.menu-name-container > input {
   flex: 0.8;
 
   color: var(--letter-color);
@@ -34,18 +34,18 @@
   font-size: 1.2rem;
 }
 
-.new-task-name-container .task-delete-button {
+.menu-name-container .element-delete-button {
   background-color: var(--header-color);
   opacity: 1;
   margin-left: auto;
 }
 
-.new-task-name-container .task-delete-button:hover {
+.menu-name-container .element-delete-button:hover {
   background-color: var(--mark-color);
 }
 
 /* FEATURES CONTAINER */
-.new-task-features-container {
+.menu-features-container {
   display: flex;
   gap: 20px;
 
@@ -53,8 +53,8 @@
   border-bottom: 1px solid var(--mark-color);
 }
 
-.new-task-features-container > select,
-.new-task-features-container > input {
+.menu-features-container > select,
+.menu-features-container > input {
   background-color: var(--header-color);
   color: var(--letter-color);
   padding: 3px;
@@ -74,7 +74,7 @@
 }
 
 /* BUTTONS CONTAINER */
-.new-task-buttons-container {
+.menu-buttons-container {
   display: flex;
   gap: 20px;
   align-self: flex-end;

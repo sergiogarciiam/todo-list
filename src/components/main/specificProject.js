@@ -2,6 +2,7 @@ import { tasksController } from "../../utils/tasksController";
 import { mainDisplayController } from "../mainDisplayController";
 import { addNewTaskButton } from "../tasks/addNewTaskButton";
 import { taskComponent } from "../tasks/task";
+import { blockerComponent } from "./blocker";
 
 const specificProjectComponent = (() => {
   const setUp = (id, project) => {
@@ -21,7 +22,7 @@ const specificProjectComponent = (() => {
     backButton.addEventListener("click", mainDisplayController.setProjects);
     backButton.appendChild(backIcon);
 
-    specificProjectContainer.appendChild(createBlocker());
+    specificProjectContainer.appendChild(blockerComponent.setUp());
     specificProjectContainer.appendChild(backButton);
     specificProjectContainer.appendChild(specificProjectTitle);
     specificProjectContainer.appendChild(createTasksContainer(id));
@@ -34,7 +35,7 @@ const specificProjectComponent = (() => {
     const tasksContainer = document.createElement("div");
     const tasksDictionary = tasksController.getAllTasks();
 
-    tasksContainer.classList.add("tasks-container");
+    tasksContainer.classList.add("elements-container");
 
     for (let key in tasksDictionary) {
       if (tasksDictionary.hasOwnProperty(key)) {
@@ -47,14 +48,6 @@ const specificProjectComponent = (() => {
     }
 
     return tasksContainer;
-  }
-
-  function createBlocker() {
-    const blocker = document.createElement("div");
-    blocker.classList.add("blocker");
-    blocker.classList.add("hide");
-
-    return blocker;
   }
 
   return { setUp };
