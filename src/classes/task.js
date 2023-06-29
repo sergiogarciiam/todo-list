@@ -1,3 +1,5 @@
+import { dateController } from "../controllers/dateController";
+
 export class Task {
   constructor(mainContainer = null) {
     this._name = "";
@@ -63,7 +65,7 @@ export class Task {
     if (mainContainer.classList.contains("today-container")) {
       return dateController.getTodayDate();
     } else if (mainContainer.classList.contains("day-container")) {
-      const dayOfWeek = getDayOfWeek(mainContainer);
+      const dayOfWeek = this.getDayOfWeek(mainContainer);
       return dateController.getNextDayOfWeek(dayOfWeek);
     } else {
       return "";
