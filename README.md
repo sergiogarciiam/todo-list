@@ -34,6 +34,11 @@ The project is from [The Odin Project](https://www.theodinproject.com/lessons/no
 
 ![todo list screenshot](./src/assets/images/screenshot.png)
 
+## Acknowledgements
+
+- Project idea by [The Odin Project](https://www.theodinproject.com/)
+- Web icon from [favicon](https://favicon.io/)
+
 ## Author
 
 [Sergio García](https://github.com/sergiogarciiam)
