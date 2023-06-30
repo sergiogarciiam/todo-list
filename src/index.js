@@ -11,6 +11,7 @@ import "./assets/styles/element.css";
 import "./assets/styles/elementMenu.css";
 import "./assets/styles/deleteMenu.css";
 import "./assets/styles/global.css";
+import "./assets/styles/responsive.css";
 
 import "@fortawesome/fontawesome-free/js/fontawesome";
 import "@fortawesome/fontawesome-free/js/solid";

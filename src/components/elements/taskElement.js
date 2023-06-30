@@ -69,7 +69,7 @@ const taskElement = (() => {
     const taskTitle = taskContainer.querySelector(".element-title");
     const taskCheckbox = taskContainer.querySelector(".task-checkbox-button");
     const taskProject = taskContainer.querySelector(".task-project");
-    const taskEditButton = taskContainer.querySelector(".task-edit-button");
+    const taskEditButton = taskContainer.querySelector(".element-edit-button");
 
     let taskDate = taskContainer.querySelector(".task-date");
 

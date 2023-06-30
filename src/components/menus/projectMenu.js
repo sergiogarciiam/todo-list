@@ -20,7 +20,7 @@ const projectsMenu = (() => {
     return projectMenuContainer;
   };
 
-  // MAIN FUNCTIONS
+  // CONTAINERS FUNCTIONS
   function createNameContainer() {
     const nameContainer = document.createElement("div");
     const inputProjectName = document.createElement("input");

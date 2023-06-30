@@ -24,7 +24,7 @@ const taskMenu = (() => {
     return taskMenuContainer;
   };
 
-  // MAIN FUNCTIONS
+  // CONTAINERS FUNCTIONS
   function createNameContainer() {
     const nameContainer = document.createElement("div");
     const checkbox = document.createElement("button");
