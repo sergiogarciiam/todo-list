@@ -66,12 +66,6 @@ const projectElement = (() => {
     const parentTargetClass = target.parentNode.classList;
 
     if (
-      targetClass.contains("element-title") ||
-      targetClass.contains("element-container") ||
-      targetClass.contains("project-point")
-    ) {
-      openSpecificProject(target.closest(".element-container"));
-    } else if (
       targetClass.contains("element-edit-button") ||
       targetClass.contains("fa-pen") ||
       parentTargetClass.contains("fa-pen")
@@ -91,6 +85,8 @@ const projectElement = (() => {
       parentTargetClass.contains("fa-star")
     ) {
       addQuickProject(target.closest(".element-container"));
+    } else {
+      openSpecificProject(target.closest(".element-container"));
     }
   }
 

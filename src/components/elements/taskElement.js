@@ -99,14 +99,6 @@ const taskElement = (() => {
     const parentTargetClass = target.parentNode.classList;
 
     if (
-      targetClass.contains("element-container") ||
-      targetClass.contains("task-title") ||
-      targetClass.contains("task-edit-button") ||
-      targetClass.contains("fa-pen") ||
-      parentTargetClass.contains("fa-pen")
-    ) {
-      openTaskMenu(target.closest(".element-container"));
-    } else if (
       targetClass.contains("task-checkbox-button") ||
       targetClass.contains("fa-check")
     ) {
@@ -119,6 +111,8 @@ const taskElement = (() => {
       openDeleteMenu(target.closest(".element-container"));
       const blocker = document.querySelector(".blocker");
       blocker.classList.remove("hide");
+    } else {
+      openTaskMenu(target.closest(".element-container"));
     }
   }
 
