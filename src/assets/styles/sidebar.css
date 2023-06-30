@@ -39,6 +39,10 @@
   background-color: var(--mark-color);
 }
 
+.sidebar-container .active {
+  background-color: var(--mark-color);
+}
+
 /* quick-access */
 .quick-access {
   color: var(--second-letter-color);

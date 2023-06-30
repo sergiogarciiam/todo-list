@@ -28,7 +28,7 @@ const projectElement = (() => {
     projectDeleteButton.classList.add("element-delete-button");
 
     if (project.isQuick) {
-      starIcon.className = "fa-solid fa-star active";
+      starIcon.className = "fa-solid fa-star star-active";
       projectQuickButton.classList.add("quick-active");
     } else {
       starIcon.className = "fa-regular fa-star";
@@ -130,12 +130,12 @@ const projectElement = (() => {
     const button = projectContainer.querySelector(".project-quick-button");
     const star = projectContainer.querySelector("svg");
 
-    if (!star.classList.contains("active")) {
+    if (!star.classList.contains("star-active")) {
       quickProjectsContainer.appendChild(createQuickProject(id, project));
 
       star.classList.remove("fa-regular");
       star.classList.add("fa-solid");
-      star.classList.toggle("active");
+      star.classList.toggle("star-active");
       projectsController.toggleQuick(id);
       button.classList.toggle("quick-active");
     } else {
@@ -144,7 +144,7 @@ const projectElement = (() => {
 
       star.classList.add("fa-regular");
       star.classList.remove("fa-solid");
-      star.classList.toggle("active");
+      star.classList.toggle("star-active");
       projectsController.toggleQuick(id);
       button.classList.toggle("quick-active");
     }

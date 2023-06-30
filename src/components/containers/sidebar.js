@@ -23,6 +23,7 @@ const sidebarContainer = (() => {
     const projects = createButton("Projects");
 
     buttonsContainer.classList.add("sidebar-buttons-container");
+    inbox.classList.add("active");
 
     inbox.addEventListener("click", mainDisplayController.setInbox);
     today.addEventListener("click", mainDisplayController.setToday);
@@ -64,6 +65,7 @@ const sidebarContainer = (() => {
   function createButton(name) {
     const button = document.createElement("button");
     button.textContent = name;
+    button.classList.add("sidebar-button");
 
     return button;
   }

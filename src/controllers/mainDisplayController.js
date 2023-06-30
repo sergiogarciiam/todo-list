@@ -23,30 +23,53 @@ const mainDisplayController = (() => {
     document.body.appendChild(pageContainer);
   };
 
-  const setInbox = () => {
+  const setInbox = (event) => {
+    setMarkToButton(event);
     removeMain();
     pageContainer.appendChild(inboxContainer.setUp());
   };
 
-  const setToday = () => {
+  const setToday = (event) => {
+    setMarkToButton(event);
     removeMain();
     pageContainer.appendChild(todayContainer.setUp());
   };
 
-  const setWeek = () => {
+  const setWeek = (event) => {
+    setMarkToButton(event);
     removeMain();
     pageContainer.appendChild(weekContainer.setUp());
   };
 
-  const setProjects = () => {
+  const setProjects = (event) => {
+    setMarkToButton(event);
     removeMain();
     pageContainer.appendChild(projectsContainer.setUp());
   };
 
   const setSpecificProject = (id, project) => {
+    setMarkToButton(null);
     removeMain();
     pageContainer.appendChild(specificProjectContainer.setUp(id, project));
   };
+
+  function setMarkToButton(event) {
+    const active = document.querySelector(".active");
+
+    if (active !== null) {
+      active.classList.remove("active");
+    }
+
+    if (event !== null && event.target.classList.contains("sidebar-button")) {
+      console.log(event.target);
+      event.target.classList.add("active");
+    } else {
+      const projectButton = document.querySelector(
+        ".sidebar-button:last-child"
+      );
+      projectButton.classList.add("active");
+    }
+  }
 
   function removeMain() {
     const main = document.querySelector("main");

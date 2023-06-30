@@ -5,7 +5,7 @@ const headerContainer = (() => {
     const icon = document.createElement("i");
 
     mainContainer.classList.add("header-container");
-    sidebarButton.classList.add("sidebar-button");
+    sidebarButton.classList.add("header-button");
     icon.className = "fa-solid fa-bars";
 
     sidebarButton.type = "button";
