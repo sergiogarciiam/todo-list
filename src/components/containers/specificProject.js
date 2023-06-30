@@ -22,7 +22,6 @@ const specificProjectContainer = (() => {
     backButton.addEventListener("click", mainDisplayController.setProjects);
     backButton.appendChild(backIcon);
 
-    mainContainer.appendChild(blockerElement.setUp());
     mainContainer.appendChild(backButton);
     mainContainer.appendChild(specificProjectTitle);
     mainContainer.appendChild(createTasksContainer(id));

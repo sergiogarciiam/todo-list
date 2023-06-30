@@ -40,7 +40,6 @@ const weekContainer = (() => {
 
     dayTitle.textContent = day;
 
-    dayContainer.appendChild(blockerElement.setUp());
     dayContainer.appendChild(dayTitle);
     dayContainer.appendChild(createTasksContainer(numberDay));
     dayContainer.appendChild(addNewTaskButton.setUp());

@@ -14,7 +14,6 @@ const todayContainer = (() => {
 
     todayTitle.textContent = "Today";
 
-    mainContainer.appendChild(blockerElement.setUp());
     mainContainer.appendChild(todayTitle);
     mainContainer.appendChild(createTasksContainer());
     mainContainer.appendChild(addNewTaskButton.setUp());

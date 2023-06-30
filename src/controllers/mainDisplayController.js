@@ -5,6 +5,7 @@ import { todayContainer } from "../components/containers/today";
 import { weekContainer } from "../components/containers/week";
 import { projectsContainer } from "../components/containers/projects";
 import { specificProjectContainer } from "../components/containers/specificProject";
+import { blockerElement } from "../components/elements/blockerElement";
 
 const mainDisplayController = (() => {
   let pageContainer = null;
@@ -14,6 +15,7 @@ const mainDisplayController = (() => {
 
     pageContainer.classList.add("page-container");
 
+    pageContainer.appendChild(blockerElement.setUp());
     pageContainer.appendChild(headerContainer.setUp());
     pageContainer.appendChild(sidebarContainer.setUp());
     pageContainer.appendChild(inboxContainer.setUp());

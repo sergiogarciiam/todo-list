@@ -13,7 +13,6 @@ const projectsContainer = (() => {
 
     projectsTitle.textContent = "Projects";
 
-    mainContainer.appendChild(blockerElement.setUp());
     mainContainer.appendChild(projectsTitle);
     mainContainer.appendChild(createProjectsSubContainer());
     mainContainer.appendChild(addNewProjectButton.setUp());

@@ -1,6 +1,6 @@
 .element-menu-container {
   position: relative;
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -11,11 +11,6 @@
   background-color: var(--header-color);
 
   z-index: 2;
-}
-
-.day-container .element-menu-container,
-.elements-container .element-menu-container {
-  width: 100%;
 }
 
 /* NAME CONTAINER */

@@ -1,10 +1,5 @@
 .elements-container {
   position: relative;
-  width: 50%;
-}
-
-.day-container .elements-container,
-.elements-container .elements-container {
   width: 100%;
 }
 

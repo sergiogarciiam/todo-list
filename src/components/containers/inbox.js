@@ -13,7 +13,6 @@ const inboxContainer = (() => {
 
     inboxTitle.textContent = "Inbox";
 
-    mainContainer.appendChild(blockerElement.setUp());
     mainContainer.appendChild(inboxTitle);
     mainContainer.appendChild(createTasksContainer());
     mainContainer.appendChild(addNewTaskButton.setUp());

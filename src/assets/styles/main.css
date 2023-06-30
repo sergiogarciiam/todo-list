@@ -1,12 +1,12 @@
 main {
   grid-area: main;
+  min-width: 500px;
+  margin: 50px auto;
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
-
-  margin: 50px 0 0 500px;
 }
 
 .add-button {
